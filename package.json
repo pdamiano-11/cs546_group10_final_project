@@ -1,0 +1,11 @@
+{
+  "name": "cs-546-final-project",
+  "version": "1.0.0",
+  "description": "This is the code for Group 10's CS 546 final project.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Peter Damianov Kelly DiResto Matthew Jaworski Ethan Foskey",
+  "license": "ISC"
+}
