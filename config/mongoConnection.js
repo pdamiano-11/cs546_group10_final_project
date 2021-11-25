@@ -2,7 +2,7 @@ const MongoClient = require('mongodb').MongoClient;
 const settings = {
   mongoConfig: {
     serverUrl: 'mongodb://localhost:27017/',
-    database: 'Peter_Damianov_lab6'
+    database: 'cs546group10_finalproject'
   }
 };
 const mongoConfig = settings.mongoConfig;
