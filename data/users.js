@@ -24,6 +24,7 @@ const checkInput = function checkInput(val, check){
         //Use Regex
     }
 }
+
 const createUser = async function createUser(firstName, lastName, email, gender, age, username, password) {
     
     //I chose not to make profile picture required
