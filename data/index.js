@@ -1,13 +1,13 @@
 const commentsData = require('./comments');
 const dateData = require('./dates');
-const imagesData = require('./images');
-const memoriesData = require('./memories');
-const usersData = require('./users');
+const commentData = require('./comments');
+const imageData = require('./images');
+const memoryData = require('./memories');
 
 module.exports = {
-  users: usersData,
-  memories: memoriesData,
+  users: userData,
+  memories: memoryData,
   dates: dateData,
-  images: imagesData,
-  comments: commentsData
+  comments: commentData,
+  images :imageData
 };
