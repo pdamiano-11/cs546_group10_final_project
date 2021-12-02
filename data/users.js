@@ -57,6 +57,7 @@ const createUser = async function createUser(firstName, lastName, email, gender,
     const userCollection = await users();
     
     let newUser = {
+        _id: ObjectId,
         firstName: firstName,
         lastName: lastName,
         email: email,
