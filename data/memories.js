@@ -22,6 +22,9 @@ module.exports = {
 
     async create(title, description, date, location, userId, visibility) {
         try {
+            for (let n = 0; n < arguments.length; n++) {
+                if (!arguments[n]) throw "Invalid Parameter";
+            }
             checkStrings(title);
             checkStrings(description);
             checkStrings(date);
@@ -78,10 +81,14 @@ module.exports = {
     async getById(id) {
         try {
             if (arguments.length !== 1) throw "Too many arguments";
+            for (let n = 0; n < arguments.length; n++) {
+                if (!arguments[n]) throw "Invalid Parameter";
+            }
             
             checkStrings(id);
 
             let objectId = ObjectId(id);
+            if (!ObjectId.isValid(memoryObjId)) throw "Invalid memory ID";
 
             const memoryCollection = await memories();
             const memory = await memoryCollection.findOne({_id: objectId});
@@ -112,6 +119,9 @@ module.exports = {
     async delete(id) {
         try {
             if (arguments.length !== 1) throw "Too many arguments";
+            for (let n = 0; n < arguments.length; n++) {
+                if (!arguments[n]) throw "Invalid Parameter";
+            }
             
             checkStrings(id);
 
@@ -130,6 +140,9 @@ module.exports = {
 
     async update(id, title, description, images, date, location, visibility) {
         try {
+            for (let n = 0; n < arguments.length; n++) {
+                if (!arguments[n]) throw "Invalid Parameter";
+            }
             checkStrings(title);
             checkStrings(description);
             checkStrings(date);
