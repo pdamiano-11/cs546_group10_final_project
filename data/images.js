@@ -22,6 +22,9 @@ module.exports = {
     async create(memoryId, placeholderText, bstring) {
         try {
             if (arguments.length !== 3) throw "Invalid amount of arguments";
+            for (let n = 0; n < arguments.length; n++) {
+                if (!arguments[n]) throw "Invalid Parameter";
+            }
             checkStrings(memoryId);
             checkStrings(placeholderText);
             checkStrings(bstring);
@@ -45,12 +48,89 @@ module.exports = {
 
             return {imageAdded: true};
         } catch (e) {
-            throw "images.js Error: " + e;
+            throw "images.js create Error: " + e;
         }
     },
 
     async get(id) {
+        try {
+            if (arguments.length !== 1) throw "Invalid amount of arguments";
+            if (!id) throw "ID not found";
 
+            checkStrings(id);
+
+            let objectId = ObjectId(id);
+            if (!ObjectId.isValid(memoryObjId)) throw "Invalid memory ID";
+
+            const memoryCollection = await memories();
+            let parentMemory = await memoryCollection.findOne({"images._id" : objectId});
+
+            let imgLink = 0;
+            for (let n = 0; n < parentMemory["images"].length; n++) {
+                if (parentMemory["images"][n]["_id"].toString() === id) {
+                    imgLink = parentMemory["images"][n]["bstring"];
+                    break;
+                }
+            }
+            return imgLink;
+
+        } catch (e) {
+            throw "images.js get Error: " + e;
+        }
     },
 
+    async getAll(memoryId) {
+        try {
+            if (arguments.length !== 1) throw "Invalid amount of arguments";
+            if (!memoryId) throw "Memory ID not found";
+
+            checkStrings(memoryId);
+
+            const objectId = ObjectId(memoryId);
+            if (!ObjectId.isValid(restId)) throw "Invalid Object ID";
+
+            let parentMemory = mem.getById(memoryId);
+
+            let imgLinks = [];
+            for (let i = 0; i < parentMemory["images"].length; i++) {
+                imgLinks.push(parentMemory["images"][i]["bstring"]);
+            }
+
+            return imgLinks;
+
+        } catch (e) {
+            throw "images.js getAll Error: " + e;
+        }
+    },
+
+    async remove(id) {
+        try {
+            if (arguments.length !== 1) throw "Invalid amount of arguments";
+            if (!id) throw "ID not found";
+
+            checkStrings(id);
+
+            let objectId = ObjectId(id);
+            if (!ObjectId.isValid(memoryObjId)) throw "Invalid memory ID";
+
+            const memoryCollection = await memories();
+            let parentMemory = await memoryCollection.findOne({"images._id" : objectId});
+
+            let img = 0;
+            for (let n = 0; n < parentMemory["images"].length; n++) {
+                if (parentMemory["images"][n]["_id"].toString() === id) {
+                    img = parentMemory["images"][n];
+                    break;
+                }
+            }
+
+            const deleteImage = await memoryCollection.updateOne({ _id : parentMemory['_id'] }, {$pull : {images : img}});
+            if (deleteImage.modifiedCount === 0) throw `Could not delete image with description: ${img['placeholderText']}`;
+        
+            return {"img" : img["placeholderText"], "deleted" : true};
+
+        } catch (e) {
+            throw "images.js remove Error: " + e;
+        }
+    }
 }
