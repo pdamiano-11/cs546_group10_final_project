@@ -53,6 +53,15 @@ router.get('/:id', async (req, res) => {
         const memory = await memoriesData.getById(req.params.id);
         res.render('memory/displayMem', {id: memory._id, title: memory.title, description: memory.description, date: memory.date, location: memory.location, userId: memory.userId, visibility: memory.visibility});
 
+        //auth stuff
+        if(req.session.user){
+            console.log('true');
+          }
+  
+          else{
+            console.log('false');
+          }
+
     } catch (e) {
         res.status(404).json({ message: 'Memory not found' });
     }

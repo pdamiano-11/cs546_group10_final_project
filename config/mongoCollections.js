@@ -20,5 +20,6 @@ const getCollectionFn = (collection) => {
 module.exports = {
   users: getCollectionFn('users'),
   memories: getCollectionFn('memories'),
-  dates: getCollectionFn('dates')
+  dates: getCollectionFn('dates'),
+  comments: getCollectionFn('comments')
 };
