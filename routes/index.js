@@ -26,11 +26,7 @@ const constructorMethod = (app) => {
 
   app.get('/', async function(req,res){
     try{
-        //console.log(new Date().toUTCString());
-        //console.log(req.method);
-        //console.log(req.originalUrl);
 
-        //auth stuff
         if(req.session.user){
           console.log('true');
         }
@@ -39,11 +35,6 @@ const constructorMethod = (app) => {
           console.log('false');
           res.redirect('/login');
         }
-      //if authed
-      //res.redirect('/private');
-
-      //if not authed
-      //res.sendFile(path.join(__dirname+'/../public/login.html'));
 
     }
     catch (e) {
