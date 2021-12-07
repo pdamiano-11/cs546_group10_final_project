@@ -16,6 +16,9 @@ router.get('/', async (req, res) => {
   else{
     console.log('User not authed. Rendering Login Page.');
     res.sendFile(path.join(__dirname+'/../public/html/login.html'));
+    
+    //const main_hbs = {id: req.params.id, title: "MyMemoryMap Home"};
+    //res.render('../views/memory/homepage.handlebars', main_hbs);
   }
 
   
