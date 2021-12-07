@@ -10,12 +10,12 @@ router.get('/', async (req, res) => {
     try{
         
     if(req.session.user){
-      console.log('true');
+      console.log('No need to signup. You are authed.');
       res.redirect('/index');
     }
   
     else{
-        
+        console.log('You are not authed. Sign up now!');
         res.sendFile(path.join(__dirname+'/../public/html/signup.html'));
     }
   
@@ -51,9 +51,9 @@ router.get('/', async (req, res) => {
       }
   
       else{
-        console.log("Redirecting to /private...");
+        console.log("Redirecting to /index...");
         req.session.user = {username: input_username, password: input_password};
-        res.redirect('/private');
+        res.redirect('/index');
       }
   
   
