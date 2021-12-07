@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const data = require('../data');
 const bcrypt = require('bcryptjs');
-const usersData = require('data/users');
+const usersData = data.users;
 
 
 //main user route

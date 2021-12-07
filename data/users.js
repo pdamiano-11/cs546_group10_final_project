@@ -123,3 +123,9 @@ const getUserById = async function getUserById(id) {
     }
 }
 
+module.exports = {
+    checkInput,
+    checkUser,
+    createUser,
+    getUserById
+};
