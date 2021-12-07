@@ -7,25 +7,25 @@ const users = data.users;
 
 router.get('/', async (req, res) => {
 
-  try {
-
-    if (req.session.user) {
-      console.log('true');
+    try{
+        
+    if(req.session.user){
+      console.log('No need to signup. You are authed.');
       res.redirect('/index');
     }
-
-    else {
-
-      res.sendFile(path.join(__dirname + '/../public/html/signup.html'));
+  
+    else{
+        console.log('You are not authed. Sign up now!');
+        res.sendFile(path.join(__dirname+'/../public/html/signup.html'));
     }
-
-
-  }
-  catch (e) {
-    await res.status(404).send('Sorry, page not found.');
-  }
-
-});
+  
+    
+    }
+    catch (e) {
+     await res.status(404).send('Sorry, page not found.');
+    }
+    
+  });
 
 router.post('/', async (req, res) => {
   try {

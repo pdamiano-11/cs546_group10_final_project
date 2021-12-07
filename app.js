@@ -6,6 +6,8 @@ const cookieParser = require('cookie-parser');
 const multer = require('multer');
 const morgan = require('morgan');
 const exphbs = require('express-handlebars');
+const data = require('./data');
+const memoriesData = data.memories;
 
 const static = express.static(__dirname + '/public');
 app.use('/public', static);
@@ -54,19 +56,16 @@ const storage = multer.diskStorage({
 const upload = multer({storage});
 
 
-app.post('/memory/update', upload.single('images'), (req, res) => {
+app.post('/memory/update', upload.single('images'), async (req, res) => {
   if (!req.file) {
     console.log("No file received");
-    return res.send({
-      success: false
-    });
 
   } else {
-      console.log('file received');
-      return res.send({
-        success: true
-      });
+      console.log('file received'); 
   }
+  const {id, title, description, images, date, location, userId, visibility} = req.body;
+  const memory = await memoriesData.update(id, title, description, "images", date, location, visibility);
+  res.redirect(`/memory/${id}`);
 });
 
 configRoutes(app);
