@@ -28,11 +28,13 @@ const constructorMethod = (app) => {
     try{
 
         if(req.session.user){
-          console.log('true');
+          console.log('User is correctly logged in');
+          const main_hbs = {id: req.params.id, title: "MAIN"};
+          res.render('../views/layouts/main.handlebars', main_hbs);
         }
 
         else{
-          console.log('false');
+          console.log('User not authenticated. Redirecting to login.');
           res.redirect('/login');
         }
 

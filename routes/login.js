@@ -34,32 +34,25 @@ router.post('/', async (req, res) => {
 
     const user_input =  await req.body;
 
-    //console.log("USER INPUT: ");
     console.log(user_input);
-    //console.log("____________");
 
     let input_username = user_input.username;
     let input_password = user_input.password;
 
-    //console.log(input_username);
-    //console.log(input_password);
 
     const user_check = await users.checkUser(input_username, input_password);
 
 
     if(!user_check){
       //invalid login credentials
+      console.log("invalid login credentials");
       res.redirect('/login');
     }
 
     else{
-      //console.log('setting the user');
-      //req.session.user = { username: input_username, password: input_password, userId: user_input._id };
-
-      //console.log(req.session.user);
-      console.log("Redirecting to /private...");
+      console.log("Redirecting to /...");
       req.session.user = {username: input_username, password: input_password};
-      res.redirect('/private');
+      res.redirect('/');
     }
 
 
