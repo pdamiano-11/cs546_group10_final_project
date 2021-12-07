@@ -1,6 +1,9 @@
 const mapRoutes = require('./map');
 const memoryRoutes = require('./memory');
 const userRoutes = require('./user');
+const loginRoutes = require('./login');
+const logoutRoutes = require('./logout');
+const signupRoutes = require('./signup');
 const { nextTick } = require('process');
 const express = require('express');
 const app = express();
@@ -9,6 +12,10 @@ const constructorMethod = (app) => {
   app.use('/map', mapRoutes);
   app.use('/memory', memoryRoutes);
   app.use('/user', userRoutes);
+  app.use('/login', loginRoutes);
+  //console.log('Processed the Login Route');
+  app.use('/logout', logoutRoutes);
+  app.use('/signup', signupRoutes);
 
   app.use(express.static(__dirname + '../views'));
   app.use(express.static(__dirname + '../public'));
@@ -19,22 +26,17 @@ const constructorMethod = (app) => {
 
   app.get('/', async function(req,res){
     try{
-        console.log(new Date().toUTCString());
-        console.log(req.method);
-        console.log(req.originalUrl);
+
         if(req.session.user){
-          console.log('true');
+          console.log('User is correctly logged in');
+          const main_hbs = {id: req.params.id, title: "MAIN"};
+          res.render('../views/layouts/main.handlebars', main_hbs);
         }
 
         else{
-          console.log('false');
+          console.log('User not authenticated. Redirecting to login.');
+          res.redirect('/login');
         }
-      //if authed
-      //res.redirect('/private');
-
-      //if not authed
-      //res.sendFile(path.join(__dirname+'/../public/login.html'));
-      res.redirect('/login');
 
     }
     catch (e) {
@@ -45,12 +47,6 @@ const constructorMethod = (app) => {
   
 
   //if not authorized, send to login route
-  app.use('/login', loginRoutes);
-  console.log('Processed the Login Route');
-  
-  app.use('/private', privateRoutes);
-  app.use('/signup', signupRoutes);
-  app.use('/logout', logoutRoutes);
 
   app.use('*', (req, res) => {
     res.status(404).json({ error: 'Not found' });

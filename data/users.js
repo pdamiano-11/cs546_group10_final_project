@@ -4,9 +4,9 @@ let { ObjectId, ReadPreferenceMode } = require('mongodb');
 const bcrypt = require('bcryptjs');
 const saltRounds = 12;
 
-const checkInput = function checkInput(val, check){
+const checkInput = function checkInput(val, check) {
     if (check === 'string') {
-        if (typeof(val) !== 'string') {
+        if (typeof (val) !== 'string') {
             throw "Invalid String";
         }
 
@@ -16,7 +16,7 @@ const checkInput = function checkInput(val, check){
         }
     }
     else if (check === 'number') {
-        if (typeof(val) !== 'number') {
+        if (typeof (val) !== 'number') {
             throw "Invalid Number";
         }
     }
@@ -28,7 +28,7 @@ const checkInput = function checkInput(val, check){
 
 
 const createUser = async function createUser(firstName, lastName, email, gender, age, username, password) {
-    
+
     //I chose not to make profile picture required
     if (!firstName) throw 'You must provide a first name';
     if (!lastName) throw 'You must provide a last name';
@@ -52,29 +52,29 @@ const createUser = async function createUser(firstName, lastName, email, gender,
     username = username.toLowerCase();
     if (/\s/.test(password)) throw 'password cannot have whitespaces';
     //check system if username already exists
-    
+
     const hash = await bcrypt.hash(password, saltRounds);
 
     //put new user into mongo
     const userCollection = await users();
-    
+
     let newUser = {
         _id: ObjectId,
         firstName: firstName,
         lastName: lastName,
         email: email,
         gender: gender,
-        age:age,
+        age: age,
         username: username,
         password: hash
     };
-    
-    const taken = await userCollection.findOne({username: username});
+
+    const taken = await userCollection.findOne({ username: username });
     if (taken) throw 'username is already taken';
     const insertInfo = await userCollection.insertOne(newUser);
-    
+
     if (insertInfo.insertedCount === 0) throw 'Could not add user';
-    return {userInserted: true};
+    return { userInserted: true };
 }
 
 const checkUser = async function checkUser(username, password) {
@@ -84,12 +84,12 @@ const checkUser = async function checkUser(username, password) {
     if (username.length < 4) throw 'username must be at least 4 characters long';
     if (password.length < 6) throw 'password must be at least 6 characters long';
     //if (!username.match(/^[0-9A-Za-z]+$/)) throw 'Username must be a valid string';
-    
+
     if (/\s/.test(password)) throw 'password cannot have whitespaces';
     username = username.toLowerCase();
 
     const userCollection = await users();
-    const user = await userCollection.findOne({username: username});
+    const user = await userCollection.findOne({ username: username });
     if (user === null) throw 'No user with that username';
 
     let encrypted = user.password;
@@ -100,10 +100,32 @@ const checkUser = async function checkUser(username, password) {
         //no op
     }
     if (comparePassword) {
-        return {authenticated: true}
+        return user;
     }
     else {
         throw 'Either the username or the password is invalid';
     }
 }
 
+const getUserById = async function getUserById(id) {
+    try {
+        let objectId = ObjectId(id);
+        if (!ObjectId.isValid(memoryObjId)) throw "Invalid memory ID";
+
+        const userCollection = await users();
+        const user = await userCollection.findOne({ _id: objectId });
+        if (user === null) throw "Unable to find user";
+
+        return user;
+
+    } catch (e) {
+        throw "users.js Error: " + e;
+    }
+}
+
+module.exports = {
+    checkInput,
+    checkUser,
+    createUser,
+    getUserById
+};
