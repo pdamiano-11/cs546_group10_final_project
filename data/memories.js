@@ -31,25 +31,25 @@ module.exports = {
             checkStrings(userId);
             checkStrings(visibility);
 
-            if (!moment(date, 'YYYY-MM-DD', true).isValid()) throw "Date not valid";
+            // if (!moment(date, 'YYYY-MM-DD', true).isValid()) throw "Date not valid";
 
-            if (Object.prototype.toString.call(location) !== '[object Object]') {
-                throw "Location not an object";
-            }
+            // if (Object.prototype.toString.call(location) !== '[object Object]') {
+            //     throw "Location not an object";
+            // }
 
-            if (location.length !== 4) throw "Location Object invalid";
+            // if (location.length !== 4) throw "Location Object invalid";
             
-            let attributes = ['address', 'city', 'state', 'country'];
-            if (Object.keys(location).length !== 4) throw "Incomplete location attributes";
-            for (key in location) {
-                if (attributes.indexOf(key) === -1) {
-                    throw "A location attribute key is invalid";
-                }
-                checkStrings(location[key]);
-            }
+            // let attributes = ['address', 'city', 'state', 'country'];
+            // if (Object.keys(location).length !== 4) throw "Incomplete location attributes";
+            // for (key in location) {
+            //     if (attributes.indexOf(key) === -1) {
+            //         throw "A location attribute key is invalid";
+            //     }
+            //     checkStrings(location[key]);
+            // }
 
-            userObjId = ObjectId(userId);
-            if (!ObjectId.isValid(userObjId)) throw "Invalid Object ID";
+            // userObjId = ObjectId(userId);
+            // if (!ObjectId.isValid(userObjId)) throw "Invalid Object ID";
 
             const memoryCollection = await memories();
 
@@ -88,7 +88,7 @@ module.exports = {
             checkStrings(id);
 
             let objectId = ObjectId(id);
-            if (!ObjectId.isValid(memoryObjId)) throw "Invalid memory ID";
+            if (!ObjectId.isValid(objectId)) throw "Invalid memory ID";
 
             const memoryCollection = await memories();
             const memory = await memoryCollection.findOne({_id: objectId});
@@ -148,24 +148,24 @@ module.exports = {
             checkStrings(date);
             checkStrings(visibility);
 
-            if (!Array.isArray(images)) throw "Images not an array";
+            // if (!Array.isArray(images)) throw "Images not an array";
 
-            if (!moment(dateTime, 'YYYY-MM-DD', true).isValid()) throw "Date not valid";
+            // if (!moment(dateTime, 'YYYY-MM-DD', true).isValid()) throw "Date not valid";
 
-            if (Object.prototype.toString.call(location) !== '[object Object]') {
-                throw "Location not an object";
-            }
+            // if (Object.prototype.toString.call(location) !== '[object Object]') {
+            //     throw "Location not an object";
+            // }
 
-            if (location.length !== 4) throw "Location Object invalid";
+            // if (location.length !== 4) throw "Location Object invalid";
             
-            let attributes = ['address', 'city', 'state', 'country'];
-            if (Object.keys(location).length !== 4) throw "Incomplete location attributes";
-            for (key in location) {
-                if (attributes.indexOf(key) === -1) {
-                    throw "A location attribute key is invalid";
-                }
-                checkStrings(location[key]);
-            }
+            // let attributes = ['address', 'city', 'state', 'country'];
+            // if (Object.keys(location).length !== 4) throw "Incomplete location attributes";
+            // for (key in location) {
+            //     if (attributes.indexOf(key) === -1) {
+            //         throw "A location attribute key is invalid";
+            //     }
+            //     checkStrings(location[key]);
+            // }
 
             const memoryCollection = await memories();
             let objectId = ObjectId(id);
@@ -179,7 +179,7 @@ module.exports = {
                 visibility: visibility
             }
             
-            const updatedMemory = await restaurantCollection.updateOne(
+            const updatedMemory = await memoryCollection.updateOne(
                 { _id : objectId}, 
                 {$set : newMemory});
             if (updatedMemory.modifiedCount === 0) throw "Could not update item.";
