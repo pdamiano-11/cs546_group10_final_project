@@ -12,9 +12,12 @@ router.get('/', async (req, res) => {
         res.status(500).json(e);
     }
 });
-router.get('/update', async (req, res) => {
+router.get('/update/:id', async (req, res) => {
     try {
-        res.render("memory/update", {pageTitle: "Update a memory"});
+        const memory = await memoriesData.getById(req.params.id);
+        res.render('memory/update', {title: "Update Memory", 
+            id: memory._id, memtitle: memory.title, description: memory.description, date: memory.date, 
+            location: memory.location, userId: memory.userId, visibility: memory.visibility});
     } catch (e) {
         res.status(500).json(e);
     }
@@ -32,16 +35,13 @@ router.post('/', async (req, res) => {
         res.status(500).json(e);
     }
 });
-router.post('/update', async (req, res) => {
+router.post('/update/:id', async (req, res) => {
     try {
         // do input checking
         
         const {id, title, description, images, date, location, userId, visibility} = req.body;
-
-        const newMemory = await memoriesData.update(id, title, description, "images", date, location, userId, visibility);
-        res.redirect(`/memory/${id}`);
     } catch (e) {
-        res.status(500).json(e);
+        res.status(500).json({message: "Error: " + e});
     }
 });
 
