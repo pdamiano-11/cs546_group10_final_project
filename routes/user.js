@@ -8,7 +8,7 @@ const usersData = require('data/users');
 //main user route
 router.get('/', async (req, res) => {
     try {
-        if (req.session.user) {
+        if (req.session.user._id) {
             res.redirect('/private');
         }
         return res.render('users/login', {});
@@ -29,13 +29,13 @@ router.get('/private', async (req, res) => {
     }
 });
 
-app.post('/login', async (req, res) => {
+router.post('/login', async (req, res) => {
 
     let username = req.body.username;
     let password = req.body.password;
     try {
         await usersData.checkUser(username, password);
-        req.session.user = { user: user };
+        req.session.user = { user: usersData.user };
         return res.redirect('/private');
     } catch (e) {
         //console.log(e);
@@ -45,13 +45,13 @@ app.post('/login', async (req, res) => {
     }
 });
 
-app.get('/logout', async (req, res) => {
+router.get('/logout', async (req, res) => {
     //console.log('here');
     req.session.destroy();
     return res.redirect('/');
 });
 
-app.post('/signup', async (req, res) => {
+router.post('/signup', async (req, res) => {
     if (req.session.user) {
         res.redirect('/private');
     }
