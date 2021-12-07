@@ -1,14 +1,14 @@
 <h2>{{pageTitle}}</h2>
 
-<form action="/memory/update" method = POST>
+<form action="/memory/update" method = POST enctype="multipart/form-data">
     <label for = "id">Id:</label><br>
     <input type="text" id="id" name="id" value=""><br>
     <label for = "title">Title:</label><br>
     <input type="text" id="title" name="title" value=""><br>
     <label for = "description">Description:</label><br>
     <input type="text" id="description" name="description" value=""><br>
-    <label for = "iamges">Title:</label><br>
-    <input type="text" id="images" name="images" value=""><br>
+    <label for = "images">Image:</label><br>
+    <input type="file" id="images" name="images" value=""><br>
     <label for = "date">Date:</label><br>
     <input type="text" id="date" name="date" value=""><br>
     <label for = "location">Location:</label><br>
@@ -17,7 +17,7 @@
     <input type="text" id="userId" name="userId" value=""><br>
     <label for = "visibility">Visibility:</label><br>
     <input type="text" id="visibility" name="visibility" value=""><br>
-    <input type="submit" value="Submit">
+    <input type="submit" id = "submit" value="Submit">
 </form> 
     {{!-- {{#if hasErrors}}
     <ul class="error-list">

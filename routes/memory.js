@@ -35,10 +35,10 @@ router.post('/', async (req, res) => {
 router.post('/update', async (req, res) => {
     try {
         // do input checking
-
+        
         const {id, title, description, images, date, location, userId, visibility} = req.body;
 
-        const newMemory = await memoriesData.update(id, title, description, images, date, location, userId, visibility);
+        const newMemory = await memoriesData.update(id, title, description, "images", date, location, userId, visibility);
         res.redirect(`/memory/${id}`);
     } catch (e) {
         res.status(500).json(e);
@@ -50,20 +50,21 @@ router.get('/:id', async (req, res) => {
     try {
 
         //get a memory and display the memory view by its ID
-        const memory = await memoriesData.getById(req.params.id);
+        let id = req.params.id.toString();
+        const memory = await memoriesData.getById(id);
         res.render('memory/displayMem', {id: memory._id, title: memory.title, description: memory.description, date: memory.date, location: memory.location, userId: memory.userId, visibility: memory.visibility});
 
         //auth stuff
-        if(req.session.user){
-            console.log('true');
-          }
+        // if(req.session.user){
+        //     console.log('true');
+        //   }
   
-          else{
-            console.log('false');
-          }
+        //   else{
+        //     console.log('false');
+        //   }
 
     } catch (e) {
-        res.status(404).json({ message: 'Memory not found' });
+        res.status(404).json({ message: 'Memory not found: ' + e });
     }
 });
 

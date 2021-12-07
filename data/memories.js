@@ -88,7 +88,7 @@ module.exports = {
             checkStrings(id);
 
             let objectId = ObjectId(id);
-            if (!ObjectId.isValid(memoryObjId)) throw "Invalid memory ID";
+            if (!ObjectId.isValid(objectId)) throw "Invalid memory ID";
 
             const memoryCollection = await memories();
             const memory = await memoryCollection.findOne({_id: objectId});

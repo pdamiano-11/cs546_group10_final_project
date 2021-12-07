@@ -107,3 +107,8 @@ const checkUser = async function checkUser(username, password) {
     }
 }
 
+module.exports = {
+    checkInput,
+    checkUser,
+    createUser
+};
