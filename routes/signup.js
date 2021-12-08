@@ -16,7 +16,10 @@ router.get('/', async (req, res) => {
   
     else{
         console.log('You are not authed. Sign up now!');
-        res.sendFile(path.join(__dirname+'/../public/html/signup.html'));
+        //res.sendFile(path.join(__dirname+'/../public/html/signup.html'));
+
+        const main_hbs = {id: req.params.id, title: "Signup"};
+        res.render('../views/memory/signup.handlebars', main_hbs);
     }
   
     
