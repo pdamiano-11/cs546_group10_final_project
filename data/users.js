@@ -2,6 +2,7 @@ const mongoCollections = require("../config/mongoCollections");
 const users = mongoCollections.users;
 let { ObjectId, ReadPreferenceMode } = require('mongodb');
 const bcrypt = require('bcryptjs');
+const { nodeName } = require("jquery");
 const saltRounds = 12;
 
 const checkInput = function checkInput(val, check) {
@@ -27,7 +28,7 @@ const checkInput = function checkInput(val, check) {
 
 
 
-const createUser = async function createUser(firstName, lastName, email, gender, age, username, password) {
+const createUser = async function createUser(firstName, lastName, email, gender, age, profilePicture, username, password) {
 
     //I chose not to make profile picture required
     if (!firstName) throw 'You must provide a first name';
@@ -37,6 +38,7 @@ const createUser = async function createUser(firstName, lastName, email, gender,
     if (!age) throw 'You must provide an age';
     if (!username) throw 'You must provide a username';
     if (!password) throw 'You must provide a password';
+    if (!profilePicture) throw 'You must provide a profile picture';
     //below username and password is same as needed for lab, we can change
     if (username.length < 4) throw 'username must be at least 4 characters long';
     if (password.length < 6) throw 'password must be at least 6 characters long';
@@ -66,7 +68,15 @@ const createUser = async function createUser(firstName, lastName, email, gender,
         gender: gender,
         age: age,
         username: username,
-        password: hash
+        password: hash,
+        profilePicture: profilePicture,
+        memories:[],
+        settings: {
+            colorMode: lightMode,
+            colorBlindness: none,
+            trackLocation: Off,
+            showRealName: Off
+        }
     };
 
     const taken = await userCollection.findOne({ username: username });
@@ -110,7 +120,7 @@ const checkUser = async function checkUser(username, password) {
 const getUserById = async function getUserById(id) {
     try {
         let objectId = ObjectId(id);
-        if (!ObjectId.isValid(memoryObjId)) throw "Invalid memory ID";
+        if (!ObjectId.isValid(objectId)) throw "Invalid user ID";
 
         const userCollection = await users();
         const user = await userCollection.findOne({ _id: objectId });
@@ -123,7 +133,7 @@ const getUserById = async function getUserById(id) {
     }
 }
 
-const updateUser = async function updateUser(id,firstName, lastName, email, gender, age, username) {
+const updateUser = async function updateUser(id,firstName, lastName, email, gender, age, username, profilePicture) {
     try {
         for (let n = 0; n < arguments.length; n++) {
             if (!arguments[n]) throw "Invalid Parameter";
@@ -134,7 +144,7 @@ const updateUser = async function updateUser(id,firstName, lastName, email, gend
         if (!gender) throw 'You must provide a gender';
         if (!age) throw 'You must provide an age';
         if (!username) throw 'You must provide a username';
-        if (!password) throw 'You must provide a password';
+        if (!profilePicture) throw 'You must provide a profile picture';
         //below username and password is same as needed for lab, we can change
         if (username.length < 4) throw 'username must be at least 4 characters long';
         if (password.length < 6) throw 'password must be at least 6 characters long';
@@ -148,7 +158,9 @@ const updateUser = async function updateUser(id,firstName, lastName, email, gend
         if (!(/\S+@\S+\.\S+/.test(email))) throw 'not a valid email';
         //case insensitive username
         username = username.toLowerCase();
-
+        
+        const taken = await userCollection.findOne({ username: username });
+        if (taken) throw 'username is already taken';
         const userCollection = await users();
         let objectId = ObjectId(id);
 
@@ -159,6 +171,7 @@ const updateUser = async function updateUser(id,firstName, lastName, email, gend
             gender: gender,
             age: age,
             username: username,
+            profilePicture: profilePicture
         }
         
         const updatedUser = await userCollection.updateOne(
