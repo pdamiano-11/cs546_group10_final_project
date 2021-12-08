@@ -19,7 +19,7 @@ router.get('/', async (req, res) => {
     req.session.destroy();
     
     const main_hbs = {id: req.params.id, title: "MyMemoryMap Home"};
-    res.render('../views/memory/login.handlebars', main_hbs);
+    res.render('memory/login');
   }
 
   
@@ -46,22 +46,13 @@ router.post('/', async (req, res) => {
 
     const user_check = await users.checkUser(input_username, input_password);
 
-
-    if(!user_check){
-      //invalid login credentials
-      console.log("invalid login credentials");
-      res.redirect('/login');
-    }
-
-    else{
-      console.log("Redirecting to /...");
-      req.session.user = {username: input_username, password: input_password};
-      res.redirect('/');
-    }
+    console.log("Redirecting to /...");
+    req.session.user = {user: user_check};
+    res.redirect('/');
 
 
    } catch (e) {
-    await res.status(404).send('Sorry, page not found.');
+    res.redirect('/');
   }
 });
 

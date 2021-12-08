@@ -28,7 +28,7 @@ const checkInput = function checkInput(val, check) {
 
 
 
-const createUser = async function createUser(firstName, lastName, email, gender, age, profilePicture, username, password) {
+const createUser = async function createUser(firstName, lastName, email, gender, age, username, password) {
 
     //I chose not to make profile picture required
     if (!firstName) throw 'You must provide a first name';
@@ -38,7 +38,6 @@ const createUser = async function createUser(firstName, lastName, email, gender,
     if (!age) throw 'You must provide an age';
     if (!username) throw 'You must provide a username';
     if (!password) throw 'You must provide a password';
-    if (!profilePicture) throw 'You must provide a profile picture';
     //below username and password is same as needed for lab, we can change
     if (username.length < 4) throw 'username must be at least 4 characters long';
     if (password.length < 6) throw 'password must be at least 6 characters long';
@@ -69,7 +68,7 @@ const createUser = async function createUser(firstName, lastName, email, gender,
         age: age,
         username: username,
         password: hash,
-        profilePicture: profilePicture,
+        profilePicture: {},
         memories:[],
         settings: {
             colorMode: lightMode,
@@ -133,7 +132,7 @@ const getUserById = async function getUserById(id) {
     }
 }
 
-const updateUser = async function updateUser(id,firstName, lastName, email, gender, age, username, profilePicture) {
+const updateUser = async function updateUser(id, firstName, lastName, email, gender, age, username) {
     try {
         for (let n = 0; n < arguments.length; n++) {
             if (!arguments[n]) throw "Invalid Parameter";
@@ -144,7 +143,6 @@ const updateUser = async function updateUser(id,firstName, lastName, email, gend
         if (!gender) throw 'You must provide a gender';
         if (!age) throw 'You must provide an age';
         if (!username) throw 'You must provide a username';
-        if (!profilePicture) throw 'You must provide a profile picture';
         //below username and password is same as needed for lab, we can change
         if (username.length < 4) throw 'username must be at least 4 characters long';
         if (password.length < 6) throw 'password must be at least 6 characters long';
@@ -171,7 +169,6 @@ const updateUser = async function updateUser(id,firstName, lastName, email, gend
             gender: gender,
             age: age,
             username: username,
-            profilePicture: profilePicture
         }
         
         const updatedUser = await userCollection.updateOne(
