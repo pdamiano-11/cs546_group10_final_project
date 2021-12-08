@@ -8,7 +8,7 @@ const usersData = data.users;
 //main user route
 router.get('/', async (req, res) => {
     try {
-        if (req.session.user) {
+        if (req.session.user._id) {
             res.redirect('/private');
         }
         return res.render('users/login', {});
@@ -33,8 +33,10 @@ router.post('/login', async (req, res) => {
 
     let username = req.body.username;
     let password = req.body.password;
+    if(!username) throw 'You must enter a username';
+    if(!password) throw 'You must enter a password';
     try {
-        await usersData.checkUser(username, password);
+        user = await usersData.checkUser(username, password);
         req.session.user = { user: user };
         return res.redirect('/private');
     } catch (e) {
