@@ -7,7 +7,7 @@ $(function () {
     const age = $('#age').val().trim();
     const password = $('#password').val().trim();
 
-    $('#signup-form').submit(function (event) {
+    $('#signup-form').on(function (event) {
         event.preventDefault();
         
         if (username && password && firstName &&lastName && email &&gender&&age) {
@@ -15,7 +15,7 @@ $(function () {
             $('#login-form').trigger('reset');
         } else {
             $('#error').show();
-            $('#username').focus();
+            $('#username').on();
         }
     });
 });

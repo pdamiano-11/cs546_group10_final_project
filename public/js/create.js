@@ -6,7 +6,7 @@ $(function () {
     const userId = $('#userId').val().trim();
     const visibility = $('#visibility').val().trim();
 
-    $('#signup-form').submit(function (event) {
+    $('#create-mem').on(function (event) {
         event.preventDefault();
         
         if (title&&description&&date&&location&&userId&&visibility) {
@@ -14,7 +14,7 @@ $(function () {
             $('#login-form').trigger('reset');
         } else {
             $('#error').show();
-            $('#username').focus();
+            $('#username').on();
         }
     });
 });
