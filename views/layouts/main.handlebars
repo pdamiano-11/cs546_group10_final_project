@@ -5,19 +5,30 @@
     <title>{{title}}</title>
     <link rel="stylesheet" href="../public/css/site.css">
 </head>
-<body>
+<body id="main_body">
     <main>{{{body}}}
 
-        <a href = "" id="gallery_view" hidden>Gallery View</a>
-        <a href = "" id="calendar_view" hidden>Calendar View</a>
-        <a href = "" id="my_profile" hidden>My Profile</a>
+        <div class="unbordered" id="main_nav_div">
+            <a href = "" id="gallery_view" class="" hidden>Gallery View</a>
+        <a href = "" id="calendar_view" class="" hidden>Calendar View</a>
+        <a href = "" id="my_profile" class="" hidden>My Profile</a>
         <!--<a href = "" id="log_out" hidden>Log Out</a>
         <a href = "" id="home_page" hidden>Homepage</a>-->
 
-        <a href = "/logout" id="log_out">Log Out</a>
-        <br>
-        <a href = "/" id="home_page" >Homepage</a>
+        <a href = "/logout" id="log_out" class="">Log Out</a>
+        
+        <a href = "/" id="home_page" class="">Homepage</a>
+        </div>
+    
     </main>
+
+    <footer class="" id="main_footer">
+        <p class="">MyMemoryMap</p>
+        <p class="">Peter Damianov, Kelly DiResto, Ethan Foskey, Matthew Jaworski</p>
+        <p class="">Course: CS 546</p>
+        <p class="">Semester: 21F</p>
+        <p class="">Assignment: Final Project</p>
+    </footer>
 
     <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
         crossorigin="anonymous"></script>
