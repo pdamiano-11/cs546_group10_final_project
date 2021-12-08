@@ -29,8 +29,8 @@ const constructorMethod = (app) => {
 
         if(req.session.user){
           console.log('User is correctly logged in');
-          const main_hbs = {id: req.params.id, title: "MAIN"};
-          res.render('../views/layouts/main.handlebars', main_hbs);
+          const main_hbs = {id: req.params.id, title: "MyMemoryMap Home"};
+          res.render('../views/memory/homepage.handlebars', main_hbs);
         }
 
         else{

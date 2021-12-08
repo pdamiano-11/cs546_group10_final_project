@@ -10,12 +10,16 @@ router.get('/', async (req, res) => {
     //check for auth here and if authed, then route back to '/'???????
   if(req.session.user){
     console.log('true');
-    res.redirect('/index');
+    res.redirect('/');
   }
 
   else{
     console.log('User not authed. Rendering Login Page.');
-    res.sendFile(path.join(__dirname+'/../public/html/login.html'));
+    //res.sendFile(path.join(__dirname+'/../public/html/login.html'));
+    req.session.destroy();
+    
+    const main_hbs = {id: req.params.id, title: "MyMemoryMap Home"};
+    res.render('../views/memory/login.handlebars', main_hbs);
   }
 
   
