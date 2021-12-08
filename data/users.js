@@ -189,5 +189,6 @@ module.exports = {
     checkInput,
     checkUser,
     createUser,
-    getUserById
+    getUserById,
+    updateUser
 };
