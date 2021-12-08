@@ -19,7 +19,7 @@ const checkStrings = function checkStrings(string) {
 
 module.exports = {
 
-    async create(memoryId, placeholderText, bstring) {
+    async create(memoryId, placeholderText, fileLink) {
         try {
             if (arguments.length !== 3) throw "Invalid amount of arguments";
             for (let n = 0; n < arguments.length; n++) {
@@ -27,7 +27,7 @@ module.exports = {
             }
             checkStrings(memoryId);
             checkStrings(placeholderText);
-            checkStrings(bstring);
+            checkStrings(fileLink);
 
             let memoryObjId = ObjectId(memoryId);
             if (!ObjectId.isValid(memoryObjId)) throw "Invalid memory ID";
@@ -40,7 +40,7 @@ module.exports = {
                 _id: new ObjectId(),
                 memoryId: memoryId,
                 placeholderText: placeholderText,
-                bstring: bstring
+                fileLink: fileLink
             }
 
             const addImage = await memoryCollection.updateOne({ _id: memoryObjId}, {$push: {images: newImage}});
@@ -68,7 +68,7 @@ module.exports = {
             let imgLink = 0;
             for (let n = 0; n < parentMemory["images"].length; n++) {
                 if (parentMemory["images"][n]["_id"].toString() === id) {
-                    imgLink = parentMemory["images"][n]["bstring"];
+                    imgLink = parentMemory["images"][n]["fileLink"];
                     break;
                 }
             }
@@ -93,7 +93,7 @@ module.exports = {
 
             let imgLinks = [];
             for (let i = 0; i < parentMemory["images"].length; i++) {
-                imgLinks.push(parentMemory["images"][i]["bstring"]);
+                imgLinks.push(parentMemory["images"][i]["fileLink"]);
             }
 
             return imgLinks;

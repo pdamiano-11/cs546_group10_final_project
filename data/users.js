@@ -2,6 +2,7 @@ const mongoCollections = require("../config/mongoCollections");
 const users = mongoCollections.users;
 let { ObjectId, ReadPreferenceMode } = require('mongodb');
 const bcrypt = require('bcryptjs');
+const { nodeName } = require("jquery");
 const saltRounds = 12;
 
 const checkInput = function checkInput(val, check) {
@@ -66,7 +67,15 @@ const createUser = async function createUser(firstName, lastName, email, gender,
         gender: gender,
         age: age,
         username: username,
-        password: hash
+        password: hash,
+        profilePicture: {},
+        memories:[],
+        settings: {
+            colorMode: lightMode,
+            colorBlindness: none,
+            trackLocation: Off,
+            showRealName: Off
+        }
     };
 
     const taken = await userCollection.findOne({ username: username });
@@ -110,7 +119,7 @@ const checkUser = async function checkUser(username, password) {
 const getUserById = async function getUserById(id) {
     try {
         let objectId = ObjectId(id);
-        if (!ObjectId.isValid(memoryObjId)) throw "Invalid memory ID";
+        if (!ObjectId.isValid(objectId)) throw "Invalid user ID";
 
         const userCollection = await users();
         const user = await userCollection.findOne({ _id: objectId });
@@ -123,9 +132,60 @@ const getUserById = async function getUserById(id) {
     }
 }
 
+const updateUser = async function updateUser(id, firstName, lastName, email, gender, age, username) {
+    try {
+        for (let n = 0; n < arguments.length; n++) {
+            if (!arguments[n]) throw "Invalid Parameter";
+        }
+        if (!firstName) throw 'You must provide a first name';
+        if (!lastName) throw 'You must provide a last name';
+        if (!email) throw 'You must provide a email';
+        if (!gender) throw 'You must provide a gender';
+        if (!age) throw 'You must provide an age';
+        if (!username) throw 'You must provide a username';
+        //below username and password is same as needed for lab, we can change
+        if (username.length < 4) throw 'username must be at least 4 characters long';
+        if (password.length < 6) throw 'password must be at least 6 characters long';
+        if (age < 13) throw 'must be 13 years or older to use MemoryMap';
+        //check for validity of names (no numbers/special characters)
+        if (!firstName.match(/^[A-Za-z]+$/)) throw 'invalid first name';
+        if (!lastName.match(/^[A-Za-z]+$/)) throw 'invalid last name';
+        //below only uses alphanumeric
+        if (!username.match(/^[0-9A-Za-z]+$/)) throw 'Username must be a valid string';
+        //email validation below checks for @ and . only
+        if (!(/\S+@\S+\.\S+/.test(email))) throw 'not a valid email';
+        //case insensitive username
+        username = username.toLowerCase();
+        
+        const taken = await userCollection.findOne({ username: username });
+        if (taken) throw 'username is already taken';
+        const userCollection = await users();
+        let objectId = ObjectId(id);
+
+        let updates = {
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            gender: gender,
+            age: age,
+            username: username,
+        }
+        
+        const updatedUser = await userCollection.updateOne(
+            { _id : objectId}, 
+            {$set : updates});
+        if (updatedUser.modifiedCount === 0) throw "Could not update item.";
+        
+        return {updated: true};
+
+    } catch (e) {
+        throw "users.js Error: " + e;
+    }
+}
 module.exports = {
     checkInput,
     checkUser,
     createUser,
-    getUserById
+    getUserById,
+    updateUser
 };
