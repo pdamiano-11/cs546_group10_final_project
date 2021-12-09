@@ -47,7 +47,7 @@ router.post('/', async (req, res) => {
     const user_check = await users.checkUser(input_username, input_password);
 
     console.log("Redirecting to /profile");
-    req.session.user = {user_check};
+    req.session.user = user_check;
     res.redirect('/profile');
 
 

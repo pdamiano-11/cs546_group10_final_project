@@ -5,6 +5,7 @@ const usersData = require('../data/users');
 router.get('/', async (req, res) => {
     try{
     user = req.session.user;
+    console.log(user);
     return res.render('memory/profile',
         {
             firstName: user.firstName,
@@ -15,7 +16,7 @@ router.get('/', async (req, res) => {
             //profilePicture: user.profilePicture
         })
     } catch (e) {
-        res.status(500).send();
+        res.redirect('/login');
     }
 });
 

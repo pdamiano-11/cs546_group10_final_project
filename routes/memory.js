@@ -24,15 +24,21 @@ router.get('/update/:id', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-    try {
+    if (req.session.user) {
+        try {
         // do input checking
 
-        const {title, description, date, location, userId, visibility} = req.body;
+        let user = req.session.user;
+        const {title, description, date, location, visibility} = req.body;
 
-        const newMemory = await memoriesData.create(title, description, date, location, userId, visibility);
+        const newMemory = await memoriesData.create(title, description, date, location, user._id.toString(), visibility);
         res.redirect(`/memory/${newMemory}`);
-    } catch (e) {
-        res.status(500).json(e);
+        } catch (e) {
+            res.status(500).json({message: "Error" + e});
+        }
+    }
+    else {
+        res.redirect('/login')
     }
 });
 router.post('/update/:id', async (req, res) => {
