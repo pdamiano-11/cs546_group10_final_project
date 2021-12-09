@@ -10,7 +10,7 @@ router.get('/', async (req, res) => {
     //check for auth here and if authed, then route back to '/'???????
   if(req.session.user){
     console.log('true');
-    res.redirect('/gallery/view');
+    res.redirect('/profile');
   }
 
   else{
@@ -46,9 +46,9 @@ router.post('/', async (req, res) => {
 
     const user_check = await users.checkUser(input_username, input_password);
 
-    console.log("Redirecting to /gallery/view");
+    console.log("Redirecting to /profile");
     req.session.user = {user_check};
-    res.redirect('/gallery/view');
+    res.redirect('/profile');
 
 
    } catch (e) {

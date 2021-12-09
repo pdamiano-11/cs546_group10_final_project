@@ -6,7 +6,7 @@ const memoriesData = data.memories;
 router.get('/view', async (req, res) => {
     // Get all memories and process and show them
     if (req.session.user) {
-        res.render('memory/gallery', {memories: req.session.user.user.memories});
+        res.render('memory/gallery', {memories: req.session.user.memories});
     } else {
         res.redirect('/login');
     }

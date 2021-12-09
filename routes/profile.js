@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const usersData = require('data/users');
+const usersData = require('../data/users');
 
-router.get('/profile', async (req, res) => {
+router.get('/', async (req, res) => {
     try{
     user = req.session.user;
     return res.render('views/memory/profile',
@@ -12,7 +12,7 @@ router.get('/profile', async (req, res) => {
             email: user.email,
             gender: user.gender,
             age: user.age,
-            profilePicture: user.profilePicture
+            //profilePicture: user.profilePicture
         })
     } catch (e) {
         res.status(500).send();

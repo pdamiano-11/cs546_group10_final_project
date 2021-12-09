@@ -71,10 +71,10 @@ const createUser = async function createUser(firstName, lastName, email, gender,
         profilePicture: {},
         memories:[],
         settings: {
-            colorMode: lightMode,
-            colorBlindness: none,
-            trackLocation: Off,
-            showRealName: Off
+            colorMode: "lightMode",
+            colorBlindness: "none",
+            trackLocation: "Off",
+            showRealName: "Off"
         }
     };
 
