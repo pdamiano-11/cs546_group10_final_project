@@ -5,17 +5,34 @@
 <div>
     <h3>Filter Memories</h3>
     <br>
-    <form id="filters" method="POST">
-        <label></label>
+    <form id="sorts_filter" method="POST">
+        <label for="sorts">Sort by Type:</label>
+        <select id="sorts" name="sorts">
+            <option value="titleaz">by Title (A-Z)</option>
+            <option value="date">by Date</option>
+            <option value="location">by Location</option>
+        </select>
+
+        <label for="filters">Filter by...</label>
+        <select id="filters" name="filters">
+            <option value="imgmems">Memories with images</option>
+            <option value="noimgmems">Memories without images</option>
+        </select>
+        <br>
+        <input type="submit">
     </form>
 </div>
 
-{{#if memories}}
-<ul>
-    {{#each memories}}
-        <li>
+<div>
+    {{#if memories}}
+        <ul>
+            {{#each memories}}
+            <li>
 
-        </li>
-    {{/each}}
-</ul>
-{{/if}}
+            </li>
+            {{/each}}
+        </ul>
+    {{/if}}
+</div>
+
+<script src="/public/js/galleryFilters.js"></script>
