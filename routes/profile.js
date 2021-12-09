@@ -5,7 +5,7 @@ const usersData = require('../data/users');
 router.get('/', async (req, res) => {
     try{
     user = req.session.user;
-    return res.render('views/memory/profile',
+    return res.render('memory/profile',
         {
             firstName: user.firstName,
             lastName: user.lastName,
