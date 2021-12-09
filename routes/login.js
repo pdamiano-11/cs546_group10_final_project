@@ -10,7 +10,7 @@ router.get('/', async (req, res) => {
     //check for auth here and if authed, then route back to '/'???????
   if(req.session.user){
     console.log('true');
-    res.redirect('/');
+    res.redirect('/profile');
   }
 
   else{
@@ -19,7 +19,7 @@ router.get('/', async (req, res) => {
     req.session.destroy();
     
     const main_hbs = {id: req.params.id, title: "MyMemoryMap Home"};
-    res.render('memory/login');
+    res.render('memory/login', main_hbs);
   }
 
   
@@ -46,9 +46,9 @@ router.post('/', async (req, res) => {
 
     const user_check = await users.checkUser(input_username, input_password);
 
-    console.log("Redirecting to /...");
-    req.session.user = {user: user_check};
-    res.redirect('/');
+    console.log("Redirecting to /profile");
+    req.session.user = {user_check};
+    res.redirect('/profile');
 
 
    } catch (e) {

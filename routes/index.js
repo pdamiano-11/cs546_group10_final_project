@@ -1,9 +1,11 @@
 const mapRoutes = require('./map');
 const memoryRoutes = require('./memory');
-const userRoutes = require('./user');
 const loginRoutes = require('./login');
 const logoutRoutes = require('./logout');
 const signupRoutes = require('./signup');
+const calendarRoutes = require('./calendar');
+const galleryRoutes = require('./gallery');
+const profileRoutes = require('./profile')
 const { nextTick } = require('process');
 const express = require('express');
 const app = express();
@@ -11,11 +13,13 @@ const app = express();
 const constructorMethod = (app) => {
   app.use('/map', mapRoutes);
   app.use('/memory', memoryRoutes);
-  app.use('/user', userRoutes);
   app.use('/login', loginRoutes);
   //console.log('Processed the Login Route');
   app.use('/logout', logoutRoutes);
   app.use('/signup', signupRoutes);
+  app.use('/gallery', galleryRoutes);
+  app.use('/calendar', calendarRoutes);
+  app.use('/profile', profileRoutes);
 
   app.use(express.static(__dirname + '../views'));
   app.use(express.static(__dirname + '../public'));

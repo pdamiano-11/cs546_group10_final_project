@@ -1,6 +1,13 @@
 const express = require('express');
 const router = express.Router();
 
-router.get('/calendar', async (req, res) => {
-    res.render('memory/calendar', {title: "Calendar"});
+router.get('/view', async (req, res) => {
+    if (req.session.user) {
+        res.render('memory/calendar', {title: "Calendar"});
+    }
+    else {
+        res.redirect('/login');
+    }
 });
+
+module.exports = router;

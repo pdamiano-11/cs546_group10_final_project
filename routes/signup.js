@@ -54,9 +54,9 @@ router.post('/', async (req, res) => {
     }
 
     else {
-      console.log("Redirecting to /private...");
+      console.log("Redirecting to /profile...");
       req.session.user = { username: input_username, password: input_password };
-      res.redirect('/private');
+      res.redirect('/profile');
     }
 
 
