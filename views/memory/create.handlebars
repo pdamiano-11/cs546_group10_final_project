@@ -1,6 +1,6 @@
 <h1 id="">{{pageTitle}}</h1>
 
-<form action="/memory" method = POST id="create_form">
+<form action="/memory" method = POST id="create_mem">
     <label for = "title" id="create_title_label">Title:</label><br>
     <input type="text" id="title" name="title" value=""><br>
     <label for = "description" id="create_title_label">Description:</label><br>
@@ -24,5 +24,6 @@
         {{/each}}
     </ul>
     {{/if}} --}}
+    <script src = "/cs546_group10_final_project/public/js/create.js"></script>
     <a href="/memory/update" id="create_update_memory">Update an existing Memory</a>
     

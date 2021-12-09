@@ -1,11 +1,15 @@
 $(function () {
-    const username = $('#username').val().trim();
-    const password = $('#password').val().trim();
+    const title = $('#title').val().trim();
+    const description = $('#description').val().trim();
+    const date = $('#date').val().trim();
+    const location = $('#location').val().trim();
+    const userId = $('#userId').val().trim();
+    const visibility = $('#visibility').val().trim();
 
-    $('#login-form').on(function (event) {
+    $('#create-mem').on(function (event) {
         event.preventDefault();
         
-        if (username && password) {
+        if (title&&description&&date&&location&&userId&&visibility) {
             $('#error').hide();
             $('#login-form').trigger('reset');
         } else {
@@ -15,12 +19,11 @@ $(function () {
     });
 });
 
-
-
 //Accessibility stuff
 /*
 $.fn.normalmode = function() {
     alert('Strip all applied classes off and return to default color scheme');
+    
     return this;
 }; 
 
@@ -46,5 +49,4 @@ $.fn.add_deutanopia = function() {
 $.fn.add_protanopia = function() {
     alert('hello world');
     return this;
-};
-*/
+};*/
