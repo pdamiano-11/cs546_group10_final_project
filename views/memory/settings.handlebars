@@ -1,27 +1,28 @@
 <main>
-
     <form method="POST" id="settings-form">
-        <div id= "error" hidden>Must Enter Username/Password</div>
-        <input type="text" id="username" name="username"></input>
-        <label for="username">Username</label>
-
- 
-        <label for="username" id="username_label">Username</label>
+        <label for="colors">Choose a Color Theme:</label>
+        <select name="colors" id="colors">
+            <option id = "normal" value="normal">Normal</option>
+            <option id = "dark" value="dark">Dark</option>
+            <option id = "tritanopia" value="tritanopia">Tritanopia</option>
+            <option id = "deutanopia" value="deutanopia">Deutanopia</option>
+            <option id = "protanopia" value="protanopia">Protanopia</option>
+        </select>
         <br>
-        <input type="text" id="username" name="username" class=""></input>
-        
-
+        <label for="real_name">Show Real Name on Profile?</label>
+        <select name="real_name" id="real_name">
+            <option id = "yes_name" value="yes_name">Yes</option>
+            <option id = "no_name" value="no_name">No</option>
+        </select>
         <br>
-        <label for="password" id="password_label">Password</label>
-        <br>
-        <input type="password" id="password" name="password" class=""></input>
-
-        <br>
-    
-        <input type="submit" id="loginSubmit" name="loginSubmit"><br>
-        <label for="loginSubmit">Submit Form</label>
+        <label for="location_track">Allow Us to Track Your Location?</label>
+        <select name="location_track" id="location_track">
+            <option id = "yes_track" value="yes_track">Yes</option>
+            <option id = "no_track" value="no_track">No</option>
+        </select>
+    <input type="submit" value="Submit">
     </form>
 
-    <script src = "/cs546_group10_final_project/public/js/login.js"></script>
-    <a href="/signup">Need to register? Click here to sign-up</a>
+    <script src="/cs546_group10_final_project/public/js/main.js"></script>
+    <a href="/profile">Back to Profile</a>
 </main>
