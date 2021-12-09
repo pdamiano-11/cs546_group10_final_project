@@ -39,6 +39,10 @@
         return this;
     };
 
+    $('#settings-form').on(function (event) {
+        event.preventDefault();
+        //add the jquery to set settings here
+    });
 
 
 })(window.jQuery);
