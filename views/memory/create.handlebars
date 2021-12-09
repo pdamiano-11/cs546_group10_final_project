@@ -1,19 +1,19 @@
-<h2>{{pageTitle}}</h2>
+<h1 id="">{{pageTitle}}</h1>
 
-<form action="/memory" method = POST>
-    <label for = "title">Title:</label><br>
+<form action="/memory" method = POST id="create_mem">
+    <label for = "title" id="create_title_label">Title:</label><br>
     <input type="text" id="title" name="title" value=""><br>
-    <label for = "description">Description:</label><br>
+    <label for = "description" id="create_title_label">Description:</label><br>
     <input type="text" id="description" name="description" value=""><br>
-    <label for = "date">Date:</label><br>
+    <label for = "date" id="create_date_label">Date:</label><br>
     <input type="text" id="date" name="date" value=""><br>
-    <label for = "location">Location:</label><br>
+    <label for = "location" id="create_location_label">Location:</label><br>
     <input type="text" id="location" name="location" value=""><br>
-    <label for = "userId">UserId:</label><br>
+    <label for = "userId" id="create_UserId_label">UserId:</label><br>
     <input type="text" id="userId" name="userId" value=""><br>
-    <label for = "visibility">Visibility:</label><br>
+    <label for = "visibility" id="create_visibility_label">Visibility:</label><br>
     <input type="text" id="visibility" name="visibility" value=""><br>
-    <input type="submit" value="Submit">
+    <input type="submit" id="create_submit" value="Submit">
 </form> 
     {{!-- {{#if hasErrors}}
     <ul class="error-list">
@@ -24,4 +24,6 @@
         {{/each}}
     </ul>
     {{/if}} --}}
-    <a href="/memory/update">Update an existing Memory</a>
+    <script src = "/cs546_group10_final_project/public/js/create.js"></script>
+    <a href="/memory/update" id="create_update_memory">Update an existing Memory</a>
+    

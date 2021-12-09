@@ -1,24 +1,24 @@
-<h2>{{title}}</h2>
-<p>{{id}}</p>
-<form action="/memory/update" method = POST enctype="multipart/form-data">
+<h1 id="update_title">{{title}}</h1>
+<p class="">{{id}}</p>
+<form action="/memory/update" method = POST enctype="multipart/form-data" id="update_mem">
     {{!-- <label for = "id">Id:</label><br> --}}
-    <input type="text" id="id" name="id" value="{{id}}" hidden><br>
+    <input type="text" id="id" name="id" value="{{id}}" class="" hidden><br>
     
-    <label for = "title">Title:</label><br>
+    <label for = "title" id="title_label">Title:</label><br>
     <input type="text" id="title" name="title" value="{{memtitle}}"><br>
-    <label for = "description">Description:</label><br>
+    <label for = "description" id="description_label">Description:</label><br>
     <input type="text" id="description" name="description" value="{{description}}"><br>
-    <label for = "images">Image:</label><br>
-    <input type="file" id="images" name="images" value=""><br>
-    <label for = "date">Date:</label><br>
-    <input type="text" id="date" name="date" value="{{date}}"><br>
-    <label for = "location">Location:</label><br>
-    <input type="text" id="location" name="location" value="{{location}}"><br>
+    <label for = "images" id="images_label">Image:</label><br>
+    <input type="file" id="images" name="images" value="" class=""><br>
+    <label for = "date" id="date_label">Date:</label><br>
+    <input type="text" id="date" name="date" value="{{date}}" class=""><br>
+    <label for = "location" id="location_label">Location:</label><br>
+    <input type="text" id="location" name="location" value="{{location}}" class=""><br>
     {{!-- <label for = "userId">UserId:</label><br>
     <input type="text" id="userId" name="userId" value="{{userId}}"><br> --}}
-    <label for = "visibility">Visibility:</label><br>
+    <label for = "visibility" id="visibility_label">Visibility:</label><br>
     <input type="text" id="visibility" name="visibility" value="{{visibility}}"><br>
-    <input type="submit" id = "submit" value="Submit">
+    <input type="submit" id = "submit" value="Submit" class="">
 </form> 
     {{!-- {{#if hasErrors}}
     <ul class="error-list">
@@ -29,4 +29,6 @@
         {{/each}}
     </ul>
     {{/if}} --}}
-    <a href="/">Create a new Memory</a>
+    <script src = "/cs546_group10_final_project/public/js/updateMem.js"></script>
+    <a href="/" id="update_create_memory">Create a new Memory</a>
+    
