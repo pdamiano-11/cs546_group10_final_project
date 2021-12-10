@@ -39,9 +39,42 @@
         return this;
     };
 
+    const colorMode = $('#colors');
+    const realName = $('#real_name');
+    const locationTrack = $('#location_trank');
+
     $('#settings-form').on(function (event) {
         event.preventDefault();
-        //add the jquery to set settings here
+        if (colorMode.val() == 'normal'){
+            normalmode();
+        }
+        if (colorMode.val() == 'dark'){
+            add_darkmode();
+        }
+        if (colorMode.val() == 'tritanopia'){
+            add_tritanopia();
+        }
+        if (colorMode.val() == 'deutanopia'){
+            add_deutanopia();
+        }
+        if (colorMode.val() == 'protanopia'){
+            add_protanopia();
+        }
+        if (realName.val() == 'yes_name'){
+            // create something to show/hide name
+        }
+        if (realName.val() == 'no_name'){
+            // create something to show/hide name
+        }
+        if (locationTrack.val() == 'yes_track'){
+            //figure out how to track location
+        }
+        if (locationTrack.val() == 'no_track'){
+            //figure out how to track location
+        }
+
+
+        
     });
 
 
