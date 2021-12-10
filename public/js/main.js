@@ -62,9 +62,11 @@
         }
         if (realName.val() == 'yes_name'){
             // create something to show/hide name
+            $('#profile_name').show();
         }
         if (realName.val() == 'no_name'){
             // create something to show/hide name
+            $('#profile_name').hide();
         }
         if (locationTrack.val() == 'yes_track'){
             //figure out how to track location
@@ -72,7 +74,6 @@
         if (locationTrack.val() == 'no_track'){
             //figure out how to track location
         }
-
 
         
     });
