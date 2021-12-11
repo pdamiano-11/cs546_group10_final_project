@@ -71,8 +71,7 @@ const createUser = async function createUser(firstName, lastName, email, gender,
         profilePicture: {},
         memories:[],
         settings: {
-            colorMode: "lightMode",
-            colorBlindness: "none",
+            colorMode: "normalMode",
             trackLocation: "Off",
             showRealName: "Off"
         }
