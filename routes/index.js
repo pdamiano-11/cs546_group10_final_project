@@ -17,14 +17,7 @@ const constructorMethod = (app) => {
   //console.log('Processed the Login Route');
   app.use('/logout', logoutRoutes);
   app.use('/signup', signupRoutes);
-  app.use('/gallery', async(req, res) => {
-    if (req.session.user) {
-      res.render('memory/gallery', {memories: req.session.user.memories});
-    } else {
-      res.redirect('/login');
-    }
-  });
-  app.use('/gallery/get', galleryRoutes);
+  app.use('/gallery', galleryRoutes);
   app.use('/calendar', calendarRoutes);
   app.use('/profile', profileRoutes);
 

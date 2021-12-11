@@ -25,13 +25,16 @@
 
 <div>
     {{#if memories}}
-        <ul>
+        <dl>
             {{#each memories}}
-            <li>
-
-            </li>
+            <dt>
+                <a href="/memory/{{this._id}}">{{this.title}}</a>
+            </dt>
+            <dd>
+                {{this.description}}
+            </dd>
             {{/each}}
-        </ul>
+        </dl>
     {{/if}}
 </div>
 
