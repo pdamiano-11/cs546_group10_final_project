@@ -5,7 +5,8 @@ let filterby = document.getElementById("filters");
 if (sortFilterForm) {
     sortFilterForm.addEventListener('submit', (event) => {
         event.preventDefault();
-        alert(sortby.value.trim());
+        alert(mems);
+        
 
     });
 }

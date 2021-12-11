@@ -1,5 +1,6 @@
 const mongoCollections = require("../config/mongoCollections");
 const memories = mongoCollections.memories;
+const users = mongoCollections.users;
 let { ObjectId, ReadPreferenceMode } = require('mongodb');
 const moment = require('moment');
 const { updateLocale } = require("moment");
@@ -31,7 +32,7 @@ module.exports = {
             checkStrings(userId);
             checkStrings(visibility);
 
-            // if (!moment(date, 'DD-MM-YYYY', true).isValid()) throw "Date not valid";
+            // if (!moment(date, 'DD-MM-YYYYkok', true).isValid()) throw "Date not valid";
 
             // if (Object.prototype.toString.call(location) !== '[object Object]') {
             //     throw "Location not an object";
@@ -48,8 +49,8 @@ module.exports = {
             //     checkStrings(location[key]);
             // }
 
-            // userObjId = ObjectId(userId);
-            // if (!ObjectId.isValid(userObjId)) throw "Invalid Object ID";
+            userObjId = ObjectId(userId);
+            if (!ObjectId.isValid(userObjId)) throw "Invalid Object ID";
 
             const memoryCollection = await memories();
 
@@ -70,6 +71,10 @@ module.exports = {
 
             const newId = insertedMemory.insertedId;
             const newIdString = newId.toString();
+
+            const userCollection = await users();
+            const userNewMem = await userCollection.updateOne({_id : userObjId}, {$push : {memories : newIdString}});
+            if (userNewMem.modifiedCount === 0) throw "Could not add memory to user";
 
             return newIdString;
 
