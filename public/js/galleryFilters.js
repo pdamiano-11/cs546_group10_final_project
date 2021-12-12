@@ -1,4 +1,4 @@
-const Moment = require('moment');
+//const Moment = require('moment');
 (function($) {
     var requestConfig = {
         method: "GET",
