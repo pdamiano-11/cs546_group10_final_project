@@ -7,6 +7,7 @@ const calendarRoutes = require('./calendar');
 const galleryRoutes = require('./gallery');
 const profileRoutes = require('./profile');
 const jsonRoutes = require('./getmems');
+const settingsRoutes = require('./settings');
 const { nextTick } = require('process');
 const express = require('express');
 const xss = require('xss');
@@ -23,6 +24,7 @@ const constructorMethod = (app) => {
   app.use('/getmemories', jsonRoutes);
   app.use('/calendar', calendarRoutes);
   app.use('/profile', profileRoutes);
+  app.use('/settings', settingsRoutes);
 
   app.use(express.static(__dirname + '../views'));
   app.use(express.static(__dirname + '../public'));
