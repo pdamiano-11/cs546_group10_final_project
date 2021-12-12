@@ -7,6 +7,7 @@ const Moment = require('moment');
     $.ajax(requestConfig).then(function(memories) {
         $("#memoryList").empty();
         for (var n = 0; n < memories.length; n++) {
+            //POSSIBLE XSS vulnerability IDK tho
             $("#memoryList").append(`<dt><a href=/memory/${memories[n]._id}>${memories[n].title}</a></dt><dd>${memories[n].description}</dd>`);
         }
         $("#memoryList").show();
