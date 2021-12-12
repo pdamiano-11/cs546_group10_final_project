@@ -1,11 +1,45 @@
+<script 
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB4OR__xoGteLldJyCTxt5h0lvURiIKCso&libraries=places&callback=initMap"
+async></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+<script>
+    function initMap() {
+        var input = document.getElementById('location');
+        var autocomplete = new google.maps.places.Autocomplete(input);
+        var city, lat, lng;
+        new google.maps.event.addListener(autocomplete, 'place_changed', function () {
+            var place = autocomplete.getPlace();
+            city = place.name;
+            lat = place.geometry.location.lat();
+            lng = place.geometry.location.lng();
+            alert(city);
+
+        });
+        const loc = { lat: lat, lng: lng };
+        alert(loc.lat);
+        // The map, centered at Uluru
+        const map = new google.maps.Map(document.getElementById("map"), {
+          zoom: 4,
+          center: loc,
+        });
+        // The marker, positioned at Uluru
+        const marker = new google.maps.Marker({
+          position: loc,
+          map: map,
+        });
+    }
+    google.maps.event.addDomListener(window, 'load', initMap); 
+</script>
+
 <h1 id="display_title">{{title}}</h1>
 <h1 id="display_description">{{description}}</h1>
 <h1 id="display_date">{{date}}</h1>
 <h1 id="display_location">{{location}}</h1>
-<h1 id="display_userId">{{userId}}</h1>
+<div id="map"></div>
 <h1 id="display_visibility">{{visibility}}</h1>
-<h1 id="display_id">{{id}}</h1>
 
 <a href = "/memory" id="display_create_memory">Create a new Memory</a>
 <a href = '/memory/update/{{id}}' id="display_update_memory">Update this Memory</a>
+<a href = "/memory/delete/{{id}}" id="display_delete_memory">Delete this Memory</a>
 <a href = "/profile">Return to Profile</a>
