@@ -330,3 +330,7 @@ input[type=text], input[type=password], select {
     color: #323748;
   }
 
+  #map {
+    height: 400px;
+    width: 100%;
+}
