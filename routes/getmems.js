@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const data = require('../data');
+const xss = require('xss');
 const memoriesData = data.memories;
 
 router.get('/', async (req, res) => {

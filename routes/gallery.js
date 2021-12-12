@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const data = require('../data');
 const memoriesData = data.memories;
+const xss = require('xss');
 
 router.use('/', async (req, res) => {
     if (req.session.user) {
