@@ -3,7 +3,7 @@ const router = express.Router();
 const data = require('../data');
 const memoriesData = data.memories;
 
-router.use('/', async (req, res) => {
+router.get('/', async (req, res) => {
     if (req.session.user) {
         try {
             let user = req.session.user;
@@ -12,8 +12,7 @@ router.use('/', async (req, res) => {
                 let mem = await memoriesData.getById(user.memories[n]);
                 memories.push(mem);
             }
-            let mems = JSON.stringify(memories);
-            res.render('memory/gallery', {memories: mems});
+            res.json(memories);
         }
         catch (e) {
             res.redirect('/profile');
