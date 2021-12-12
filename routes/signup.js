@@ -3,6 +3,7 @@ const router = express.Router();
 const data = require('../data');
 const path = require('path');
 const users = data.users;
+const xss = require('xss');
 
 
 router.get('/', async (req, res) => {
@@ -37,13 +38,13 @@ router.post('/', async (req, res) => {
 
     console.log(user_input);
 
-    let input_firstName = user_input.firstName;
-    let input_lastName = user_input.lastName;
-    let input_email = user_input.email;
-    let input_gender = user_input.gender;
-    let input_age = user_input.age;
-    let input_username = user_input.username;
-    let input_password = user_input.password;
+    let input_firstName = xss(user_input.firstName);
+    let input_lastName = xss(user_input.lastName);
+    let input_email = xss(user_input.email);
+    let input_gender = xss(user_input.gender);
+    let input_age = xss(user_input.age);
+    let input_username = xss(user_input.username);
+    let input_password = xss(user_input.password);
 
 
     const user_check = await users.createUser(input_firstName, input_lastName, input_email, input_gender, input_age, input_username, input_password);

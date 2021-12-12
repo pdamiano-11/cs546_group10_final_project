@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const usersData = require('../data/users');
+const xss = require('xss');
 
 router.get('/', async (req, res) => {
     try{
@@ -19,5 +20,17 @@ router.get('/', async (req, res) => {
         res.redirect('/login');
     }
 });
+
+router.get('/search', async (req, res) => {
+    try{
+    user = req.session.user;
+    console.log('here');
+    console.log(user);
+    return res.render('memory/profileSearch',{})
+    } catch (e) {
+        res.redirect('/login');
+    }
+});
+
 
 module.exports = router;
