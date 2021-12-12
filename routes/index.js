@@ -5,7 +5,8 @@ const logoutRoutes = require('./logout');
 const signupRoutes = require('./signup');
 const calendarRoutes = require('./calendar');
 const galleryRoutes = require('./gallery');
-const profileRoutes = require('./profile')
+const profileRoutes = require('./profile');
+const jsonRoutes = require('./getmems');
 const { nextTick } = require('process');
 const express = require('express');
 const app = express();
@@ -18,6 +19,7 @@ const constructorMethod = (app) => {
   app.use('/logout', logoutRoutes);
   app.use('/signup', signupRoutes);
   app.use('/gallery', galleryRoutes);
+  app.use('/getmemories', jsonRoutes);
   app.use('/calendar', calendarRoutes);
   app.use('/profile', profileRoutes);
 
