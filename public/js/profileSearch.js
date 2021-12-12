@@ -9,7 +9,7 @@ const users = require('../../data/users')
             if (search_term) {
                 const searched_user = users.getUserByUsername(search_term);
                 $('#search_profile_h1').show();
-                $('#search_profile_h1').val() = searched_user.username + "'s Profile";
+                $('#search_profile_h1').val() = `${searched_user.username}'s Profile`;
                 //$('#search_prof_pic').val() = searched_user.profilePicture;
                 if(users.settings.showRealName == 'On') {
                     $('#search_profile_name').show();
