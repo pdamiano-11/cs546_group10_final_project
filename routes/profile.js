@@ -20,4 +20,16 @@ router.get('/', async (req, res) => {
     }
 });
 
+router.get('/search', async (req, res) => {
+    try{
+    user = req.session.user;
+    console.log('here');
+    console.log(user);
+    return res.render('memory/profileSearch',{})
+    } catch (e) {
+        res.redirect('/login');
+    }
+});
+
+
 module.exports = router;

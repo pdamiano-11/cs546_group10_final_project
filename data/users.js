@@ -115,13 +115,13 @@ const checkUser = async function checkUser(username, password) {
     }
 }
 
-const getUserById = async function getUserById(id) {
+const getUserByUsername= async function getUserByUsername(username) {
     try {
-        let objectId = ObjectId(id);
-        if (!ObjectId.isValid(objectId)) throw "Invalid user ID";
-
+        // let objectId = ObjectId(id);
+        // if (!ObjectId.isValid(objectId)) throw "Invalid user ID";
+        if(!username) throw 'No username input given';
         const userCollection = await users();
-        const user = await userCollection.findOne({ _id: objectId });
+        const user = await userCollection.findOne({ username: username });
         if (user === null) throw "Unable to find user";
 
         return user;
@@ -185,6 +185,6 @@ module.exports = {
     checkInput,
     checkUser,
     createUser,
-    getUserById,
+    getUserByUsername,
     updateUser
 };
