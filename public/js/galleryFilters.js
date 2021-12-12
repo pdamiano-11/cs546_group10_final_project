@@ -1,4 +1,4 @@
-const Moment = require('moment');
+//import moment from 'moment';
 (function($) {
     var requestConfig = {
         method: "GET",
@@ -55,7 +55,7 @@ const Moment = require('moment');
                 $("#memoryList").show();
             }
             else if (sortby === "date") {
-                showMems = showMems.sort((a, b) => (new Moment(a.date).format('DD-MM-YYYY') > new Moment(b.date).format('DD-MM-YYYY')) ? 1 : -1);
+                showMems = showMems.sort((a, b) => (new moment(a.date).format('DD-MM-YYYY') > new moment(b.date).format('DD-MM-YYYY')) ? 1 : -1);
                 for (var n = 0; n < showMems.length; n++) {
                     $("#memoryList").append(`<dt><a href=/memory/${showMems[n]._id.toString()}>${showMems[n].title}</a></dt>
                     <dd>${showMems[n].description}</dd>`);

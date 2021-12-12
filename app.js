@@ -29,14 +29,8 @@ const handlebarsInstance = exphbs.create({
 
 app.engine('handlebars', handlebarsInstance.engine);
 app.set('view engine', 'handlebars');
-app.set('etag', false);
 
 app.use(express.json());
-
-app.use((req, res, next) => {
-  res.set('Cache-Control', 'no-store')
-  next()
-});
 
 app.use(
   session({
