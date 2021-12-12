@@ -3,7 +3,7 @@ const users = require('../../data/users')
 
 (function($) {
     const search_term = $('#search_term').val().trim(); 
-    $('#searchForm').on(function(event) {
+    $('#searchForm').submit(function(event) {
         event.preventDefault();
         try {
             if (search_term) {

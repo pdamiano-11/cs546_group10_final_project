@@ -1,10 +1,9 @@
 <main>
 <h1 id="the-heading">Search Other Users</h1>
     <p id = "error" hidden>Invalid Input</p>
-    <form id="searchForm">
+    <form id="searchForm" method = "POST">
         <label id="formLabel" for="search_term">Enter Username to Search:</label>
         <input type="text" id="search_term" />
-        </label>
         <button type="submit">Submit</button>
     </form>
 <div id="search_profile_div">
@@ -21,7 +20,7 @@
     <a href="/gallery">See {{{username}}}'s Gallery</a>
     <br>
 </div>
-<script src="/cs546_group10_final_project/public/js/main.js"></script>
-<script src="/cs546_group10_final_project/public/js/profileSearch.js"></script>
+<script src="/public/js/main.js"></script>
+<script src="/public/js/profileSearch.js"></script>
 
 </main>
