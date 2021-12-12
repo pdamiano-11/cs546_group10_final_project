@@ -1,13 +1,19 @@
 <main>
-
-<div id="profile_div">
-    <h1 id="profile_h1">My Profile</h1>
-    <img alt="Profile Picture" src={{{profilePicture}}}>
-    <p id = 'profile_name'>Name: {{{firstName}}} {{{lastName}}}</p>
-    <p id = 'profile_email'>Email: {{{email}}}</p>
-    <p id = 'profile_gender'>Gender: {{{gender}}}</p>
-    <p id = 'profile_age'>Age: {{{age}}}</p>
-    <a href = "" id="profile_a">Settings</a>
+<h1 id="the-heading">Search Other Users</h1>
+    <p id = "error" hidden>Invalid Input</p>
+    <form id="searchForm">
+        <label id="formLabel" for="search_term">Enter Username to Search:</label>
+        <input type="text" id="search_term" />
+        </label>
+        <button type="submit">Submit</button>
+    </form>
+<div id="search_profile_div">
+    <h1 id="search_profile_h1" hidden>My Profile</h1>
+    <img alt="Profile Picture" id = "search_prof_pic" src={{{profilePicture}}} hidden>
+    <p id = 'search_profile_name' hidden>Name: {{{firstName}}} {{{lastName}}}</p>
+    <p id = 'search_profile_email' hidden>Email: {{{email}}}</p>
+    <p id = 'search_profile_gender' hidden>Gender: {{{gender}}}</p>
+    <p id = 'search_profile_age' hidden>Age: {{{age}}}</p>
 </div>
 <div>
     <br>
@@ -16,5 +22,6 @@
     <br>
 </div>
 <script src="/cs546_group10_final_project/public/js/main.js"></script>
+<script src="/cs546_group10_final_project/public/js/profileSearch.js"></script>
 
 </main>
