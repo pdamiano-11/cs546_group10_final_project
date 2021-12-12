@@ -6,17 +6,19 @@
     <h3>Filter Memories</h3>
     <br>
     <form id="sort_filter" method="POST">
-        <label for="sorts">Sort by Type:</label>
+        <label for="sorts">Sort by...</label>
         <select id="sorts" name="sorts" class="gallery">
             <option value="titleaz">by Title (A-Z)</option>
             <option value="date">by Date</option>
             <option value="location">by Location</option>
+            <option value="regular">No Sort</option>
         </select>
 
         <label for="filters">Filter by...</label>
         <select id="filters" name="filters" class="gallery">
             <option value="imgmems">Memories with images</option>
             <option value="noimgmems">Memories without images</option>
+            <option value="all">No Filter</option>
         </select>
         <br>
         <input type="submit">
