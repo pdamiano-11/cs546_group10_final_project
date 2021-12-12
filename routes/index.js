@@ -9,6 +9,7 @@ const profileRoutes = require('./profile');
 const jsonRoutes = require('./getmems');
 const { nextTick } = require('process');
 const express = require('express');
+const xss = require('xss');
 const app = express();
 
 const constructorMethod = (app) => {

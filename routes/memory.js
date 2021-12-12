@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const data = require('../data');
 const memoriesData = data.memories;
+const xss = require('xss');
 
 
 //block this with middleware to all users
@@ -34,7 +35,13 @@ router.post('/', async (req, res) => {
         // do input checking
 
         let user = req.session.user;
-        const {title, description, date, location, visibility} = req.body;
+        //const {title, description, date, location, visibility} = xss(req.body);
+
+        const title = xss(req.body.title);
+        const description = xss(req.body.description);
+        const date = xss(req.body.date);
+        const location = xss(req.body.location);
+        const visibility = xss(req.body.visibility);
 
         const newMemory = await memoriesData.create(title, description, date, location, user._id.toString(), visibility);
         res.redirect(`/memory/${newMemory}`);

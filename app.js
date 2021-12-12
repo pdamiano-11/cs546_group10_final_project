@@ -7,6 +7,7 @@ const multer = require('multer');
 const morgan = require('morgan');
 const exphbs = require('express-handlebars');
 const data = require('./data');
+const xss = require('xss');
 const memoriesData = data.memories;
 const image = data.images;
 
@@ -70,7 +71,12 @@ app.post('/memory/update', upload.single('images'), async (req, res) => {
     } else {
         console.log('file received'); 
     }
-    const {id, title, description, images, caption, date, location, visibility} = req.body;
+    const id = xss(req.body.id);
+    const title = xss(req.body.title);
+    const description = xss(req.body.description);
+    const date = xss(req.body.date);
+    const location = xss(req.body.location);
+    const visibility = xss(req.body.visibility);
     const mem = await memoriesData.getById(id);
     let removed;
     if(mem.images.length > 0){

@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 const users = require('../data/users');
+const xss = require('xss');
 
 
 router.get('/', async (req, res) => {
@@ -36,13 +37,17 @@ router.post('/', async (req, res) => {
     //auth stuff
     //console.log("try");
 
+    console.log("XSS starts right after this");
+
     const user_input =  await req.body;
 
     console.log(user_input);
 
-    let input_username = user_input.username;
-    let input_password = user_input.password;
+    let input_username = xss(user_input.username);
+    let input_password = xss(user_input.password);
 
+    console.log(input_username);
+    console.log(input_password);
 
     const user_check = await users.checkUser(input_username, input_password);
 
