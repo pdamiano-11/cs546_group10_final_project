@@ -143,7 +143,7 @@ module.exports = {
         }
     },
 
-    async update(id, title, description, images, date, location, visibility) {
+    async update(id, title, description, date, location, visibility) {
         try {
             for (let n = 0; n < arguments.length; n++) {
                 if (!arguments[n]) throw "Invalid Parameter";
@@ -178,7 +178,6 @@ module.exports = {
             let newMemory = {
                 title: title,
                 description: description,
-                images: images,
                 date: date,
                 location: location,
                 visibility: visibility
