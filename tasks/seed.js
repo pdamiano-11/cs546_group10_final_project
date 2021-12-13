@@ -9,12 +9,10 @@ async function main() {
         const db = await dbConnection.connectToDb();
         await db.dropDatabase();
     
-        const user1 = await users.createUser();
-        const user2 = await users.createUser();
-        
+        const user1 = await users.createUser("Peter", "Damianov", "pdamiano@stevens.edu", "M", "22", "pdamiano", "password");
+        const user2 = await users.createUser("Kelly", "DiResto", "kdiresto@stevens.edu", "F", "23", "kdiresto", "password2");
+
         // Change date to current date before running seed.js
-        const memory1 = await memories.create();
-        const memory2 = await memories.create();
     
         console.log('Done seeding database');
         await dbConnection.closeConnection();
