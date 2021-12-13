@@ -20,6 +20,7 @@
 
         var sortby = $("#sorts").val();
         var filterby = $("#filters").val();
+        var favorite = $("#favorites").val();
 
         var requestConfig = {
             method: "GET",
@@ -47,6 +48,17 @@
                 }
             }
 
+            if (favorite === "yes") {
+                var tempList = [];
+                for (var n = 0; n < showMems.length; n++) {
+                    if (showMems[n].favorite === true) {
+                        tempList.push(showMems[n]);
+                    }
+                }
+                showMems = tempList;
+            }
+
+
             if (sortby === "titleaz") {
                 showMems = showMems.sort((a, b) => (a.title > b.title) ? 1 : -1);
                 for (var n = 0; n < showMems.length; n++) {
@@ -56,7 +68,7 @@
                 $("#memoryList").show();
             }
             else if (sortby === "date") {
-                showMems = showMems.sort((a, b) => (new Moment(a.date).format('DD-MM-YYYY') > new Moment(b.date).format('DD-MM-YYYY')) ? 1 : -1);
+                showMems = showMems.sort((a, b) => (new moment(a.date).format('DD-MM-YYYY') > new moment(b.date).format('DD-MM-YYYY')) ? 1 : -1);
                 for (var n = 0; n < showMems.length; n++) {
                     $("#memoryList").append(`<dt><a href=/memory/${showMems[n]._id.toString()}>${showMems[n].title}</a></dt>
                     <dd>${showMems[n].description}</dd>`);
@@ -76,6 +88,7 @@
                     <dd>${showMems[n].description}</dd>`);
                 }
             }
+
         });
 
     });

@@ -2,3 +2,27 @@
     <h2>Welcome to your calendar view!</h2>
 </header>
 
+<form id="set_date" method="POST">
+    <label for="month">Enter Month (MM):</label>
+    <input type="text" id="month" name="month">
+
+    <label for="month">Enter Year (YYYY):</label>
+    <input type="text" id="year" name="year">
+
+    <input type="submit">
+</form>
+<br>
+<div id="month_year">
+</div>
+<table id="calendar"></table>
+
+<div>
+    <br>
+    <a href="/gallery">See my Gallery</a>
+    <br><br>
+    <a href="/profile">Return to Profile</a>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="/public/js/calendarScript.js"></script>
+

@@ -16,10 +16,20 @@ const updateSettings = async function updateSettings(userId, colorMode, showReal
         let objectId = ObjectId(userId);
 
         let updates = {
+<<<<<<< HEAD
             colorMode: colorMode,
             showRealName: showRealName
             //trackLocation: trackLocation
         }
+=======
+            settings:
+            {
+                colorMode: colorMode,
+                showRealName: showRealName,
+                trackLocation: trackLocation
+            }
+                    }
+>>>>>>> a64394fd5ceddc32ccd798e7b1893958f14d5473
         //how to get it to go to settings and not just into user??
         const updatedUser = await userCollection.updateOne(
             { _id : objectId}, 
@@ -32,6 +42,7 @@ const updateSettings = async function updateSettings(userId, colorMode, showReal
         throw "settings.js Error: " + e;
     }
 }
+
 module.exports = {
     updateSettings
 };
