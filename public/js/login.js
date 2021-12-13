@@ -1,4 +1,4 @@
-$(function () {
+(function ($) {
     const username = $('#username').val().trim();
     const password = $('#password').val().trim();
 
