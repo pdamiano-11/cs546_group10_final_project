@@ -1,10 +1,10 @@
 <main>
 <h1 id="the-heading">Search Other Users</h1>
     <p id = "error">{{{error}}}</p>
-    <form id="searchForm" method = "POST" action = "/search">
+    <form id="searchForm" method = "POST">
         <label id="formLabel" for="search_term">Enter Username to Search:</label>
-        <input type="text" id="search_term" />
-        <button type="submit">Submit</button>
+        <input type="text" id="search_term" name="search_term">
+        <input type="submit">
     </form>
 
 <div>
