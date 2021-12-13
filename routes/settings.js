@@ -8,6 +8,7 @@ router.get('/', async (req, res) => {
     user = req.session.user;
     console.log(user);
     //const logout_hbs = {id: req.params.id, title: "Logout"};
+    //const memory = await memoriesData.getById(id);
     res.render('../views/memory/settings.handlebars');
     } catch (e) {
         res.redirect('/login');
@@ -17,8 +18,7 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
     try {
-  
-  
+
     } catch (e) {
         res.redirect('/');
     }
@@ -26,3 +26,4 @@ router.post('/', async (req, res) => {
 
 
 module.exports = router;
+
