@@ -136,6 +136,10 @@ input[type=text], input[type=password], select {
     color: #fbfcfc;
 }
 
+.body_dark label{
+    color: #fbfcfc;
+}
+
 .h1_dark {
     color: #fbfcfc;
 }
@@ -180,8 +184,8 @@ input[type=text], input[type=password], select {
 
   .body_t {
     font-family: Helvetica, sans-serif;
-    background-color: #abbecd;
-    color: #9a3032;
+    background-color: #003739;
+    color: #00acb7;
     max-width: 100%;
     padding: auto;
     display: table;
@@ -190,20 +194,24 @@ input[type=text], input[type=password], select {
 }
 
 .body_t a{
-    color: #9a3032;
+    color: #00acb7;
 }
 
 .body_t h1{
-    color: #9a3032;
+    color: #00acb7;
+}
+
+.body_t label{
+    color: #00acb7;
 }
 
 .h1_t {
-    color: #9a3032;
+    color: #00acb7;
 }
 
 
 .footer_t {
-    border: solid #9a3032 4px;
+    border: solid #00acb7 4px;
     padding: auto;
     width: 100%;
     margin-top: 5%;
@@ -212,7 +220,7 @@ input[type=text], input[type=password], select {
 }
 
 .bordered_t {
-    border: solid #9a3032 4px;
+    border: solid #00acb7 4px;
     padding: auto;
     width: 100%;
     margin: 0 auto;
@@ -223,14 +231,14 @@ input[type=text], input[type=password], select {
 
 
 .button1_t {
-    background-color: #abbecd; 
-    color: #9a3032; 
-    border: 2px solid #9a3032;
+    background-color: #003739; 
+    color: #00acb7; 
+    border: 2px solid #00acb7;
   }
   
 .button1_t:hover {
-    background-color: #9a3032;
-    color: #abbecd;
+    background-color: #00acb7;
+    color: #003739;
   }
 
   /*_______________________This is where the Deutanopia stuff starts_______________________*/
@@ -251,6 +259,10 @@ input[type=text], input[type=password], select {
 }
 
 .body_d h1{
+    color: #85a7f5;
+}
+
+.body_d label{
     color: #85a7f5;
 }
 
@@ -308,6 +320,10 @@ input[type=text], input[type=password], select {
 }
 
 .body_p h1{
+    color: #ffea86;
+}
+
+.body_p label{
     color: #ffea86;
 }
 
