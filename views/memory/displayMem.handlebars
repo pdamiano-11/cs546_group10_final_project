@@ -39,13 +39,14 @@ async defer></script>
 </script>
 
 <h1 id="display_title">{{title}}</h1>
+{{#if images}}
+<img src = "{{images}}">
+{{/if}}
 <h1 id="display_description">{{description}}</h1>
 <h1 id="display_date">{{date}}</h1>
 <h1 id="display_location" value="{{location}}">{{location}}</h1>
 <div id="map"></div>
 <h1 id="display_visibility">{{visibility}}</h1>
-
-
 <a href = "/memory" id="display_create_memory">Create a new Memory</a>
 <a href = '/memory/update/{{id}}' id="display_update_memory">Update this Memory</a>
 <a href = "/memory/delete/{{id}}" id="display_delete_memory">Delete this Memory</a>
