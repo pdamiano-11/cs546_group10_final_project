@@ -7,9 +7,7 @@ const multer = require('multer');
 const morgan = require('morgan');
 const exphbs = require('express-handlebars');
 const data = require('./data');
-const xss = require('xss');
 const memoriesData = data.memories;
-const image = data.images;
 
 const static = express.static(__dirname + '/public');
 app.use('/public', static);
@@ -35,10 +33,12 @@ app.set('etag', false);
 
 app.use(express.json());
 
+
 app.use((req, res, next) => {
   res.set('Cache-Control', 'no-store')
   next()
 });
+
 
 app.use(
   session({
@@ -64,9 +64,8 @@ const upload = multer({storage});
 
 
 app.post('/memory/update', upload.single('images'), async (req, res) => {
-  if(req.session.user){
-    if (!req.file) {
-      console.log("No file received");
+  if (!req.file) {
+    console.log("No file received");
 
     } else {
         console.log('file received'); 
@@ -103,7 +102,11 @@ app.post('/memory/update', upload.single('images'), async (req, res) => {
   }
   else{
     res.redirect('/login');
+
   }
+  const {id, title, description, images, date, location, userId, visibility} = req.body;
+  const memory = await memoriesData.update(id, title, description, "images", date, location, visibility);
+  res.redirect(`/memory/${id}`);
 });
 
 configRoutes(app);
