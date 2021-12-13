@@ -1,18 +1,46 @@
 <h1 id="">{{pageTitle}}</h1>
-
+<script 
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB4OR__xoGteLldJyCTxt5h0lvURiIKCso&libraries=places&callback=initAutocomplete"
+async defer></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+<script>
+    let autocomplete;
+    function initAutocomplete() {
+        autocomplete = new google.maps.places.Autocomplete(
+            document.getElementById('location'),
+            {
+                componentRestrictioin: {'country': ['USA']},
+                fields: ['place_id', 'geometry', 'name']
+            }
+        );
+        autocomplete.addListener('place_changed', onPlaceChanged)
+    }
+    function onPlaceChanged(){
+        var place = autocomplete.getPlace();
+        if(!place.geometry){
+            document.getElementById('location').placeholder = 'Enter a locatoin';
+        }
+        else{
+            let lat = place.geometry.location.lat();
+            let lng = place.geometry.location.lng();
+        }
+    }
+</script>
 <form action="/memory" method = POST id="create_mem">
     <label for = "title" id="create_title_label">Title:</label><br>
     <input type="text" id="title" name="title" value=""><br>
     <label for = "description" id="create_title_label">Description:</label><br>
     <input type="text" id="description" name="description" value=""><br>
-    <label for = "date" id="create_date_label">Date (Day-Month-Year):</label><br>
+    <label for = "date" id="create_date_label">Date (Day(DD)-Month(MM)-Year(YYYY)):</label><br>
     <input type="text" id="date" name="date" value=""><br>
     <label for = "location" id="create_location_label">Location:</label><br>
-    <input type="text" id="location" name="location" value=""><br>
+    <input type="text" id="location" name="location" value="" placeholder="Enter a location" autocomplete="on" runat="server"><br>
+    <label for = "favorite" id="create_favorite_label">Favorite? ('yes' or 'no')</label><br>
+    <input type="text" id="favorite" name="favorite" value=""><br>
     <label for = "visibility" id="create_visibility_label">Visibility:</label><br>
     <input type="text" id="visibility" name="visibility" value=""><br>
     <input type="submit" id="create_submit" value="Submit">
 </form>
-<script src = "/cs546_group10_final_project/public/js/create.js"></script>
+<script src = "/public/js/create.js"></script>
 {{!-- <a href="/memory/update" id="create_update_memory">Update an existing Memory</a> --}}
     

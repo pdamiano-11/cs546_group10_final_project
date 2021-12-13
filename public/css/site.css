@@ -346,3 +346,8 @@ input[type=text], input[type=password], select {
     height: 400px;
     width: 100%;
 }
+
+table, td {
+    border: 1px solid black;
+    margin: 2px;
+}
