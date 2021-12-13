@@ -67,8 +67,42 @@ app.post('/memory/update', upload.single('images'), async (req, res) => {
   if (!req.file) {
     console.log("No file received");
 
-  } else {
-      console.log('file received'); 
+    } else {
+        console.log('file received'); 
+    }
+    const id = xss(req.body.id);
+    const title = xss(req.body.title);
+    const description = xss(req.body.description);
+    const caption = xss(req.body.caption);
+    const date = xss(req.body.date);
+    const location = xss(req.body.location);
+    const visibility = xss(req.body.visibility);
+    const mem = await memoriesData.getById(id);
+    let removed;
+    if(mem.images.length > 0){
+      for(let i = 0; i < mem.images.length; i++)
+        removed = await image.remove(mem.images[i]._id.toString());
+    }
+    const link = '/public/static/' + req.file.originalname;
+    const imageDoc = await image.create(id, caption, link)
+    let images;
+    if(imageDoc.imageAdded == true)
+    {
+      images = true
+      console.log("in if")
+      const memoryimg = await memoriesData.update(id, title, description, date, location, visibility, images, false);
+    }
+    else
+    {
+      images = false;
+      console.log("in else")
+      const memory = await memoriesData.update(id, title, description, date, location, visibility, images, false);
+    }
+    res.redirect(`/memory/${id}`);
+  }
+  else{
+    res.redirect('/login');
+
   }
   const {id, title, description, images, date, location, userId, visibility} = req.body;
   const memory = await memoriesData.update(id, title, description, "images", date, location, visibility);
