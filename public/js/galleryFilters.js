@@ -20,6 +20,7 @@
 
         var sortby = $("#sorts").val();
         var filterby = $("#filters").val();
+        var favorite = $("#favorites").val();
 
         var requestConfig = {
             method: "GET",
@@ -46,6 +47,17 @@
                     showMems.push(memories[n]);
                 }
             }
+
+            if (favorite === "yes") {
+                var tempList = [];
+                for (var n = 0; n < showMems.length; n++) {
+                    if (showMems[n].favorite === true) {
+                        tempList.push(showMems[n]);
+                    }
+                }
+                showMems = tempList;
+            }
+
 
             if (sortby === "titleaz") {
                 showMems = showMems.sort((a, b) => (a.title > b.title) ? 1 : -1);
@@ -76,6 +88,7 @@
                     <dd>${showMems[n].description}</dd>`);
                 }
             }
+
         });
 
     });
