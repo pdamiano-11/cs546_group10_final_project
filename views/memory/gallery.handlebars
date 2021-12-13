@@ -20,11 +20,24 @@
             <option value="noimgmems">Memories without images</option>
             <option value="all">No Filter</option>
         </select>
+
+        <label for="favorites">Show Favorites?</label>
+        <select id="favorites" name="favorites" class="gallery">
+            <option value="no">No</option>
+            <option value="yes">Yes</option>
+        </select>
         <br>
         <input type="submit">
     </form>
 </div>
 
 <dl id="memoryList"></dl>
+
+<div>
+    <br>
+    <a href="/calendar">See my Calendar</a>
+    <br><br>
+    <a href="/profile">Return to Profile</a>
+</div>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="/public/js/galleryFilters.js"></script>
