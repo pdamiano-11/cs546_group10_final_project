@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
     }
 });
 
-/*
+
 router.post('/', async (req, res) => {
     try {
   
@@ -23,6 +23,6 @@ router.post('/', async (req, res) => {
         res.redirect('/');
     }
 });
-*/
+
 
 module.exports = router;
