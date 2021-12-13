@@ -32,7 +32,7 @@ module.exports = {
             checkStrings(userId);
             checkStrings(visibility);
 
-            if (!moment(date, 'DD-MM-YYYY', true).isValid()) throw "Date not valid";
+            //if (!moment(date, 'DD-MM-YYYY', true).isValid()) throw "Date not valid";
 
             // if (Object.prototype.toString.call(location) !== '[object Object]') {
             //     throw "Location not an object";

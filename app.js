@@ -61,45 +61,70 @@ const storage = multer.diskStorage({
   }
 });
 const upload = multer({storage});
+const checkStrings = async function checkStrings(string) {
+  if (typeof(string) !== 'string') {
+      throw "app.js: Not a String";
+  }
 
+  string = string.trim();
+
+  if (string.length === 0) {
+      throw "app.js: String too short";
+  }
+
+}
 
 app.post('/memory/update', upload.single('images'), async (req, res) => {
   if(req.session.user){
-    if (!req.file) {
-      console.log("No file received");
+    try{
+      if (!req.file) {
+        console.log("No file received");
 
-    } else {
-        console.log('file received'); 
-    }
-    const id = xss(req.body.id);
-    const title = xss(req.body.title);
-    const description = xss(req.body.description);
-    const caption = xss(req.body.caption);
-    const date = xss(req.body.date);
-    const location = xss(req.body.location);
-    const visibility = xss(req.body.visibility);
-    const mem = await memoriesData.getById(id);
-    let removed;
-    if(mem.images.length > 0){
-      for(let i = 0; i < mem.images.length; i++)
-        removed = await image.remove(mem.images[i]._id.toString());
-    }
-    const link = '/public/static/' + req.file.originalname;
-    const imageDoc = await image.create(id, caption, link)
-    let images;
-    if(imageDoc.imageAdded == true)
-    {
-      images = true
-      console.log("in if")
-      const memoryimg = await memoriesData.update(id, title, description, date, location, visibility, images, false);
-    }
-    else
-    {
-      images = false;
-      console.log("in else")
-      const memory = await memoriesData.update(id, title, description, date, location, visibility, images, false);
-    }
-    res.redirect(`/memory/${id}`);
+      } else {
+          console.log('file received'); 
+      }
+      const id = xss(req.body.id);
+      const title = xss(req.body.title);
+      const description = xss(req.body.description);
+      const caption = xss(req.body.caption);
+      const date = xss(req.body.date);
+      const location = xss(req.body.location);
+      const visibility = xss(req.body.visibility);
+      if(!title || !description || !date || !caption|| !location || !visibility)
+            throw "All fields must have inputs";
+      await checkStrings(title);
+      await checkStrings(description);
+      await checkStrings(caption);
+      await checkStrings(date);
+      await checkStrings(location);
+      await checkStrings(visibility);
+      const mem = await memoriesData.getById(id);
+      let removed;
+      if(mem.images.length > 0){
+        for(let i = 0; i < mem.images.length; i++)
+          removed = await image.remove(mem.images[i]._id.toString());
+      }
+      const link = '/public/static/' + req.file.originalname;
+      const imageDoc = await image.create(id, caption, link)
+      let images;
+      if(imageDoc.imageAdded == true)
+      {
+        images = true
+        let favorites = true;
+        console.log("in if")
+        const memoryimg = await memoriesData.update(id, title, description, date, location, visibility, images, favorites);
+      }
+      else
+      {
+        images = false;
+        let favorites = true;
+        console.log("in else")
+        const memory = await memoriesData.update(id, title, description, date, location, visibility, images, favorites);
+      }
+      res.redirect(`/memory/${id}`);
+  }catch(e){
+    res.status(500).json({message: "Error " + e});
+  }
   }
   else{
     res.redirect('/login');

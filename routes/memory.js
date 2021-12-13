@@ -4,7 +4,19 @@ const data = require('../data');
 const memoriesData = data.memories;
 const xss = require('xss');
 
+const checkStrings = async function checkStrings(string) {
+    if (typeof(string) !== 'string') {
+        throw "Input is not a String";
+    }
 
+    string = string.trim();
+
+    if (string.length === 0) {
+        throw  "String too short";
+    }
+    return true;
+
+}
 //block this with middleware to all users
 router.get('/', async (req, res) => {
     if(req.session.user){
@@ -35,6 +47,7 @@ router.post('/', async (req, res) => {
         // do input checking
 
         let user = req.session.user;
+        let check;
         //const {title, description, date, location, visibility} = xss(req.body);
 
         const title = xss(req.body.title);
@@ -42,6 +55,13 @@ router.post('/', async (req, res) => {
         const date = xss(req.body.date);
         const location = xss(req.body.location);
         const visibility = xss(req.body.visibility);
+        if(!title || !description || !date || !location || !visibility)
+            throw "All fields must have inputs";
+        await checkStrings(title);
+        await checkStrings(description);
+        await checkStrings(date);
+        await checkStrings(location);
+        await checkStrings(visibility);
 
         const newMemory = await memoriesData.create(title, description, date, location, user._id.toString(), visibility);
         res.redirect(`/memory/${newMemory}`);
