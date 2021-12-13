@@ -35,7 +35,7 @@ router.get('/update/:id', async (req, res) => {
         const memory = await memoriesData.getById(req.params.id);
         res.render('memory/update', {title: "Update Memory", 
             id: memory._id, memtitle: memory.title, description: memory.description, date: memory.date, 
-            location: memory.location, userId: memory.userId, visibility: memory.visibility});
+            location: memory.location, favorite: memory.favorite, userId: memory.userId, visibility: memory.visibility});
     } catch (e) {
         res.status(500).json(e);
     }
@@ -54,6 +54,7 @@ router.post('/', async (req, res) => {
         const description = xss(req.body.description);
         const date = xss(req.body.date);
         const location = xss(req.body.location);
+        const favorite = xss(req.body.favorite);
         const visibility = xss(req.body.visibility);
         if(!title || !description || !date || !location || !visibility)
             throw "All fields must have inputs";
@@ -63,7 +64,7 @@ router.post('/', async (req, res) => {
         await checkStrings(location);
         await checkStrings(visibility);
 
-        const newMemory = await memoriesData.create(title, description, date, location, user._id.toString(), visibility);
+        const newMemory = await memoriesData.create(title, description, date, location, user._id.toString(), visibility, favorite);
         res.redirect(`/memory/${newMemory}`);
         } catch (e) {
             res.status(500).json({message: "Error" + e});
