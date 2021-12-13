@@ -30,7 +30,7 @@ const checkInput = function checkInput(val, check) {
 
 const createUser = async function createUser(firstName, lastName, email, gender, age, username, password) {
 
-    //I chose not to make profile picture required
+    
     if (!firstName) throw 'You must provide a first name';
     if (!lastName) throw 'You must provide a last name';
     if (!email) throw 'You must provide a email';
@@ -38,7 +38,7 @@ const createUser = async function createUser(firstName, lastName, email, gender,
     if (!age) throw 'You must provide an age';
     if (!username) throw 'You must provide a username';
     if (!password) throw 'You must provide a password';
-    //below username and password is same as needed for lab, we can change
+    
     if (username.length < 4) throw 'username must be at least 4 characters long';
     if (password.length < 6) throw 'password must be at least 6 characters long';
     if (age < 13) throw 'must be 13 years or older to use MemoryMap';
@@ -72,7 +72,7 @@ const createUser = async function createUser(firstName, lastName, email, gender,
         memories:[],
         settings: {
             colorMode: "normalMode",
-            trackLocation: "Off",
+            // trackLocation: "Off",
             showRealName: "Off"
         }
     };

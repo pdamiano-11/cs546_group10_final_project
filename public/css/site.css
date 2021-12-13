@@ -132,6 +132,10 @@ input[type=text], input[type=password], select {
     color: #fbfcfc;
 }
 
+.body_dark h1{
+    color: #fbfcfc;
+}
+
 .h1_dark {
     color: #fbfcfc;
 }
@@ -189,6 +193,10 @@ input[type=text], input[type=password], select {
     color: #9a3032;
 }
 
+.body_t h1{
+    color: #9a3032;
+}
+
 .h1_t {
     color: #9a3032;
 }
@@ -242,6 +250,10 @@ input[type=text], input[type=password], select {
     color: #85a7f5;
 }
 
+.body_d h1{
+    color: #85a7f5;
+}
+
 .h1_d {
     color: #85a7f5;
 }
@@ -292,6 +304,10 @@ input[type=text], input[type=password], select {
 }
 
 .body_p a{
+    color: #ffea86;
+}
+
+.body_p h1{
     color: #ffea86;
 }
 
