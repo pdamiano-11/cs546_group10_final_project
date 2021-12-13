@@ -81,7 +81,7 @@ const createUser = async function createUser(firstName, lastName, email, gender,
     const insertInfo = await userCollection.insertOne(newUser);
 
     if (insertInfo.insertedCount === 0) throw 'Could not add user';
-    return { userInserted: true };
+    return newUser;
 }
 
 const checkUser = async function checkUser(username, password) {
