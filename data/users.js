@@ -68,7 +68,6 @@ const createUser = async function createUser(firstName, lastName, email, gender,
         age: age,
         username: username,
         password: hash,
-        profilePicture: {},
         memories:[],
         settings: {
             colorMode: "normalMode",
