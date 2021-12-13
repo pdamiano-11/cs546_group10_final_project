@@ -132,6 +132,10 @@ input[type=text], input[type=password], select {
     color: #fbfcfc;
 }
 
+.body_dark h1{
+    color: #fbfcfc;
+}
+
 .h1_dark {
     color: #fbfcfc;
 }
