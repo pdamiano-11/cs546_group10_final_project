@@ -62,6 +62,7 @@ module.exports = {
                 location: location,
                 userId: userId, 
                 visibility: visibility,
+                favorite: false,
                 likes: 0,
                 comments: []
             }
@@ -143,10 +144,10 @@ module.exports = {
         }
     },
 
-    async update(id, title, description, date, location, visibility) {
+    async update(id, title, description, date, location, visibility, images, favorite) {
         try {
             for (let n = 0; n < arguments.length; n++) {
-                if (!arguments[n]) throw "Invalid Parameter";
+                if (!arguments[n]) throw "Invalid Parameter: " + arguments[n];
             }
             checkStrings(title);
             checkStrings(description);
@@ -180,13 +181,14 @@ module.exports = {
                 description: description,
                 date: date,
                 location: location,
-                visibility: visibility
+                visibility: visibility,
+                favorite: favorite
             }
             
             const updatedMemory = await memoryCollection.updateOne(
                 { _id : objectId}, 
                 {$set : newMemory});
-            if (updatedMemory.modifiedCount === 0) throw "Could not update item.";
+            if (images == false && updatedMemory.modifiedCount === 0) throw "Could not update item.";
             
             return {updated: true};
 

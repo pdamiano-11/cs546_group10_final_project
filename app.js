@@ -74,6 +74,7 @@ app.post('/memory/update', upload.single('images'), async (req, res) => {
     const id = xss(req.body.id);
     const title = xss(req.body.title);
     const description = xss(req.body.description);
+    const caption = xss(req.body.caption);
     const date = xss(req.body.date);
     const location = xss(req.body.location);
     const visibility = xss(req.body.visibility);
@@ -85,15 +86,18 @@ app.post('/memory/update', upload.single('images'), async (req, res) => {
     }
     const link = '/public/static/' + req.file.originalname;
     const imageDoc = await image.create(id, caption, link)
-    if(imageDoc == {"imageAdded": true})
+    let images;
+    if(imageDoc.imageAdded == true)
     {
-      const bool = true
-      const memoryimg = await memoriesData.update(id, title, description, date, location, visibility);
+      images = true
+      console.log("in if")
+      const memoryimg = await memoriesData.update(id, title, description, date, location, visibility, images, false);
     }
     else
     {
-      const boolf = false;
-      const memory = await memoriesData.update(id, title, description, date, location, visibility );
+      images = false;
+      console.log("in else")
+      const memory = await memoriesData.update(id, title, description, date, location, visibility, images, false);
     }
     res.redirect(`/memory/${id}`);
   }

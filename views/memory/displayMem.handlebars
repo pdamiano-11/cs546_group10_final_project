@@ -1,41 +1,47 @@
 <script 
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB4OR__xoGteLldJyCTxt5h0lvURiIKCso&libraries=places&callback=initMap"
-async></script>
-<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+async defer></script>
 
 <script>
+    
     function initMap() {
-        var input = document.getElementById('location');
-        var autocomplete = new google.maps.places.Autocomplete(input);
-        var city, lat, lng;
-        new google.maps.event.addListener(autocomplete, 'place_changed', function () {
-            var place = autocomplete.getPlace();
-            city = place.name;
-            lat = place.geometry.location.lat();
-            lng = place.geometry.location.lng();
-            alert(city);
-
-        });
-        const loc = { lat: lat, lng: lng };
-        alert(loc.lat);
+        var getlat, getlng;
+        //alert(loc.lat);
         // The map, centered at Uluru
+        var geocoder = new google.maps.Geocoder();
+        var address = document.getElementById('display_location').innerHTML;
+        //alert(address);
+        geocoder.geocode({
+            'address': address
+        }, function(results, status) {
+
+            if (status == google.maps.GeocoderStatus.OK) {
+            getlat = results[0].geometry.location.lat();
+            getlng = results[0].geometry.location.lng();
+            //alert(getlng);
+            }
+            //var loc = {lat: parseFloat(getlat), lng: parseFloat(getlng)}
+        var location = new google.maps.LatLng(parseFloat(getlat),getlng);
+        //alert(location);
         const map = new google.maps.Map(document.getElementById("map"), {
-          zoom: 4,
-          center: loc,
+          zoom: 15,
+          center: location,
         });
         // The marker, positioned at Uluru
         const marker = new google.maps.Marker({
-          position: loc,
+          position: location,
           map: map,
         });
+        });
+        
     }
-    google.maps.event.addDomListener(window, 'load', initMap); 
+    
 </script>
 
 <h1 id="display_title">{{title}}</h1>
 <h1 id="display_description">{{description}}</h1>
 <h1 id="display_date">{{date}}</h1>
-<h1 id="display_location">{{location}}</h1>
+<h1 id="display_location" value="{{location}}">{{location}}</h1>
 <div id="map"></div>
 <h1 id="display_visibility">{{visibility}}</h1>
 
