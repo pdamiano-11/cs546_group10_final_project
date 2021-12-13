@@ -8,6 +8,7 @@ router.use('/', async (req, res) => {
     if (req.session.user) {
         try {
             let user = req.session.user;
+            console.log(user.memories);
             let memories = [];
             for (let n = 0; n < user.memories.length; n++) {
                 let mem = await memoriesData.getById(user.memories[n]);
@@ -17,7 +18,7 @@ router.use('/', async (req, res) => {
             res.render('memory/gallery', {memories: mems});
         }
         catch (e) {
-            res.redirect('/profile');
+            res.json(e);
         }
       } else {
         res.redirect('/login');
