@@ -36,4 +36,22 @@ router.post('/', async (req, res) => {
     }
 });
 
+router.get('/gallery', async (req, res) => {
+    if(!req.session.user){
+        res.redirect('/login');
+    }
+    try{
+        const user = req.session.user;
+        const other_username = await req.body;
+        console.log(other_username);
+        const other_user = await getUserByUsername(other_username);
+        console.log(user);
+        return res.json(other_user.memories);
+    } catch (e) {
+        res.render('memory/profileSearch',{error: 'Unable to find user'})
+    }
+});
+
+
+
 module.exports = router;
