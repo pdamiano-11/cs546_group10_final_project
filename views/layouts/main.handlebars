@@ -3,6 +3,11 @@
 <head>
     <meta charset="utf-8">
     <title>{{title}}</title>
+    <script
+        type="text/javascript"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB4OR__xoGteLldJyCTxt5h0lvURiIKCso&libraries=places"
+    ></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <link rel="stylesheet" href="/public/css/site.css">
 </head>
 <body id="main_body">
@@ -14,10 +19,8 @@
         <a href = "" id="my_profile" class="" hidden>My Profile</a>
         <!--<a href = "" id="log_out" hidden>Log Out</a>
         <a href = "" id="home_page" hidden>Homepage</a>-->
-
-        <a href = "/logout" id="log_out" class="">Log Out</a>
         
-        <a href = "/" id="home_page" class="">Homepage</a>
+        <a href = "/profile" id="home_page" class="">Profile</a>
         </div>
     
     </main>
