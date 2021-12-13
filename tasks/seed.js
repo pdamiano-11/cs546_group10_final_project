@@ -9,11 +9,12 @@ async function main() {
         const db = await dbConnection.connectToDb();
         await db.dropDatabase();
     
-        const petesDiner = await restaurants.create("Pete's Diner", "New York, New York", "123-234-3456", "http://www.petesdiner.com", "$", ["American"], {dineIn: true, takeOut: true, delivery: true});
-        const petesBuffet = await restaurants.create("Pete's Buffet", "Princeton, New Jersey", "998-765-4321", "http://www.petesbuffet.com", "$$", ["Bulgarian", "American", "Italian"], {dineIn: true, takeOut: false, delivery: false});
+        const user1 = await users.createUser();
+        const user2 = await users.createUser();
         
         // Change date to current date before running seed.js
-        const petesDinerRev1 = await reviews.create(petesDiner['_id'].toString(), 'test', 'me', 4, '10-28-2021', 'test review');
+        const memory1 = await memories.create();
+        const memory2 = await memories.create();
     
         console.log('Done seeding database');
         await dbConnection.closeConnection();
