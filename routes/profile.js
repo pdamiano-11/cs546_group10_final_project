@@ -5,7 +5,7 @@ const xss = require('xss');
 
 router.get('/', async (req, res) => {
     try{
-    user = req.session.user;
+    const user = req.session.user;
     console.log(user);
     return res.render('memory/profile',
         {
@@ -16,17 +16,6 @@ router.get('/', async (req, res) => {
             age: user.age,
             //profilePicture: user.profilePicture
         })
-    } catch (e) {
-        res.redirect('/login');
-    }
-});
-
-router.get('/search', async (req, res) => {
-    try{
-    user = req.session.user;
-    console.log('here');
-    console.log(user);
-    return res.render('memory/profileSearch',{})
     } catch (e) {
         res.redirect('/login');
     }
