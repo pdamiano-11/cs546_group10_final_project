@@ -84,7 +84,10 @@ router.get('/:id', async (req, res) => {
             
             let id = req.params.id.toString();
             const memory = await memoriesData.getById(id);
-            res.render('memory/displayMem', {id: memory._id, title: memory.title, description: memory.description, date: memory.date, location: memory.location, userId: memory.userId, visibility: memory.visibility});
+            if(memory.images.length > 0)
+                res.render('memory/displayMem', {id: memory._id, title: memory.title, description: memory.description, date: memory.date, location: memory.location, userId: memory.userId, visibility: memory.visibility, images: memory.images[0].fileLink});
+            else
+                res.render('memory/displayMem', {id: memory._id, title: memory.title, description: memory.description, date: memory.date, location: memory.location, userId: memory.userId, visibility: memory.visibility});
 
             //auth stuff
             // if(req.session.user){
