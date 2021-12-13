@@ -22,17 +22,17 @@ router.get('/', async (req, res) => {
 });
  
 
-router.post('/', async (req, res) => {
-    try {
-        const user = req.session.user;
-        console.log(user);
-        const userSettings = req.body;
-        const updated = await updateSettings(userSettings);
+// router.post('/', async (req, res) => {
+//     try {
+//         const user = req.session.user;
+//         console.log(user);
+//         const userSettings = req.body;
+//         const updated = await updateSettings(userSettings);
   
-    } catch (e) {
-        res.redirect('/');
-    }
-});
+//     } catch (e) {
+//         res.redirect('/');
+//     }
+// });
 
 
 module.exports = router;

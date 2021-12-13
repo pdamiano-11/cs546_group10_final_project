@@ -24,7 +24,6 @@ router.post('/', async (req, res) => {
         const other_user = await usersData.getUserByUsername(other_username);
         console.log(user);
         return res.render('memory/profileFound',{
-            profilePicture: other_user.profilePicture,
             firstName: other_user.firstName,
             email: other_user.email,
             gender: other_user.gender,
@@ -35,5 +34,7 @@ router.post('/', async (req, res) => {
         res.render('memory/profileSearch',{error: 'Unable to find user'})
     }
 });
+
+
 
 module.exports = router;
