@@ -78,6 +78,7 @@ app.post('/memory/update', upload.single('images'), async (req, res) => {
     const date = xss(req.body.date);
     const location = xss(req.body.location);
     const visibility = xss(req.body.visibility);
+    const favorite = xss(req.body.favorite);
     const mem = await memoriesData.getById(id);
     let removed;
     if(mem.images.length > 0){
@@ -91,13 +92,13 @@ app.post('/memory/update', upload.single('images'), async (req, res) => {
     {
       images = true
       console.log("in if")
-      const memoryimg = await memoriesData.update(id, title, description, date, location, visibility, images, false);
+      const memoryimg = await memoriesData.update(id, title, description, date, location, visibility, images, favorite);
     }
     else
     {
       images = false;
       console.log("in else")
-      const memory = await memoriesData.update(id, title, description, date, location, visibility, images, false);
+      const memory = await memoriesData.update(id, title, description, date, location, visibility, images, favorite);
     }
     res.redirect(`/memory/${id}`);
   }

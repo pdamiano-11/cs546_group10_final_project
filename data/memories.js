@@ -21,7 +21,7 @@ const checkStrings = function checkStrings(string) {
 
 module.exports = {
 
-    async create(title, description, date, location, userId, visibility) {
+    async create(title, description, date, location, userId, visibility, favorite) {
         try {
             for (let n = 0; n < arguments.length; n++) {
                 if (!arguments[n]) throw "Invalid Parameter";
@@ -31,8 +31,16 @@ module.exports = {
             checkStrings(date);
             checkStrings(userId);
             checkStrings(visibility);
+            checkStrings(favorite);
 
             if (!moment(date, 'DD-MM-YYYY', true).isValid()) throw "Date not valid";
+
+            let fav;
+            if (favorite === 'yes') {
+                fav = true; 
+            }else { 
+                fav = false;
+            }
 
             // if (Object.prototype.toString.call(location) !== '[object Object]') {
             //     throw "Location not an object";
@@ -62,7 +70,7 @@ module.exports = {
                 location: location,
                 userId: userId, 
                 visibility: visibility,
-                favorite: false,
+                favorite: fav,
                 likes: 0,
                 comments: []
             }
@@ -153,6 +161,14 @@ module.exports = {
             checkStrings(description);
             checkStrings(date);
             checkStrings(visibility);
+            checkStrings(favorite);
+
+            let fav;
+            if (favorite === 'yes') {
+                fav = true; 
+            }else { 
+                fav = false;
+            }
 
             // if (!Array.isArray(images)) throw "Images not an array";
 
@@ -182,7 +198,7 @@ module.exports = {
                 date: date,
                 location: location,
                 visibility: visibility,
-                favorite: favorite
+                favorite: fav
             }
             
             const updatedMemory = await memoryCollection.updateOne(
