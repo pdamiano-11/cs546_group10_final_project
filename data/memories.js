@@ -33,7 +33,7 @@ module.exports = {
             checkStrings(visibility);
             checkStrings(favorite);
 
-            if (!moment(date, 'DD-MM-YYYY', true).isValid()) throw "Date not valid";
+            //if (!moment(date, 'DD-MM-YYYY', true).isValid()) throw "Date not valid";
 
             let fav;
             if (favorite === 'yes') {
@@ -41,21 +41,6 @@ module.exports = {
             }else { 
                 fav = false;
             }
-
-            // if (Object.prototype.toString.call(location) !== '[object Object]') {
-            //     throw "Location not an object";
-            // }
-
-            // if (location.length !== 4) throw "Location Object invalid";
-            
-            // let attributes = ['address', 'city', 'state', 'country'];
-            // if (Object.keys(location).length !== 4) throw "Incomplete location attributes";
-            // for (key in location) {
-            //     if (attributes.indexOf(key) === -1) {
-            //         throw "A location attribute key is invalid";
-            //     }
-            //     checkStrings(location[key]);
-            // }
 
             userObjId = ObjectId(userId);
             if (!ObjectId.isValid(userObjId)) throw "Invalid Object ID";
@@ -173,21 +158,6 @@ module.exports = {
             // if (!Array.isArray(images)) throw "Images not an array";
 
             // if (!moment(dateTime, 'YYYY-MM-DD', true).isValid()) throw "Date not valid";
-
-            // if (Object.prototype.toString.call(location) !== '[object Object]') {
-            //     throw "Location not an object";
-            // }
-
-            // if (location.length !== 4) throw "Location Object invalid";
-            
-            // let attributes = ['address', 'city', 'state', 'country'];
-            // if (Object.keys(location).length !== 4) throw "Incomplete location attributes";
-            // for (key in location) {
-            //     if (attributes.indexOf(key) === -1) {
-            //         throw "A location attribute key is invalid";
-            //     }
-            //     checkStrings(location[key]);
-            // }
 
             const memoryCollection = await memories();
             let objectId = ObjectId(id);

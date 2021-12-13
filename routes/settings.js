@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
         res.redirect('/login');
     }
 });
-
+ 
 
 // router.post('/', async (req, res) => {
 //     try {
